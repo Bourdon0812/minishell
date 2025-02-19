@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:28:29 by yseguin           #+#    #+#             */
-/*   Updated: 2025/02/18 16:29:33 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/02/19 18:10:37 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+/* project header */
+# include "builtins.h"
+# include "executor.h"
+# include "parser.h"
+# include "signals.h"
+# include "utils.h"
 
 /* lib c */
 # include <stdio.h>
@@ -33,5 +40,14 @@
 /* lib readline */
 # include <readline/readline.h>
 # include <readline/history.h>
+
+/* struct */
+typedef struct s_shell
+{
+    int     running;    // 1 si le shell fonctionne, 0 sinon
+	char    *input;          // La commande en cours d'exécution
+    char    **cmd;         // Tableau des arguments de la commande
+	char    **envp;        // Tableau des variables d'environnement
+}   t_shell;
 
 #endif
