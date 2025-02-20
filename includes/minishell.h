@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:28:29 by yseguin           #+#    #+#             */
-/*   Updated: 2025/02/19 18:10:37 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:31:14 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include "parser.h"
 # include "signals.h"
 # include "utils.h"
+
+/* libft */
+# include "../libft/libft.h"
 
 /* lib c */
 # include <stdio.h>
