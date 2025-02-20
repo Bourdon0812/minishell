@@ -6,7 +6,9 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:13 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/02/19 18:04:14 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:39:29 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/* parsing.c */
+void	parsing(t_shell *shell);

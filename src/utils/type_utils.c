@@ -1,14 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   type_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 18:04:16 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/02/20 15:39:01 by ilbonnev         ###   ########.fr       */
+/*   Created: 2025/02/20 15:38:12 by ilbonnev          #+#    #+#             */
+/*   Updated: 2025/02/20 15:38:41 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* type_utils.c */
-int	is_builtins(char *str);
+#include "../includes/minishell.h"
+
+int	is_builtins(char *str)
+{
+	int					i;
+	static const char	*builtins[] = {
+		"echo",
+		"cd",
+		"pwd",
+		"export",
+		"env",
+		"exit",
+		"unset",
+		NULL
+	};
+
+	i = 0;
+	while (builtins[i] != NULL)
+	{
+		if (strcmp(str, builtins[i]) == 0)
+			return (1);
+		i++;
+	}
+	return (0);
+}
