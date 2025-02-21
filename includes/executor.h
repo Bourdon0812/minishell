@@ -6,7 +6,13 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:09 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/02/19 18:04:10 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/02/21 02:07:54 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef EXECUTOR_H
+# define EXECUTOR_H
+
+void	exe_command(t_shell *shell);
+
+#endif

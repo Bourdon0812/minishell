@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 17:12:37 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/02/20 15:44:14 by ilbonnev         ###   ########.fr       */
+/*   Created: 2025/02/21 01:41:49 by ilbonnev          #+#    #+#             */
+/*   Updated: 2025/02/21 02:14:32 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	parsing(t_shell *shell)
+/* TODO call by main */
+void	lexer(t_shell *shell, char *input)
 {
-	if (is_builtins(shell->cmd[0]))
-		exe_builtins(shell);
+	return ;
 }
