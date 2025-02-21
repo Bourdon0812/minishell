@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 15:51:40 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/02/21 02:12:07 by ilbonnev         ###   ########.fr       */
+/*   Created: 2025/02/21 01:37:44 by ilbonnev          #+#    #+#             */
+/*   Updated: 2025/02/21 02:12:26 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-void	exe_cd(t_shell *shell)
+void	exe_command(t_shell *shell)
 {
 	return ;
 }

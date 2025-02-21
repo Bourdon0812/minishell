@@ -6,9 +6,14 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:16 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/02/20 15:39:01 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/02/21 02:07:43 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef UTILS_H
+# define UTILS_H
+
 /* type_utils.c */
 int	is_builtins(char *str);
+
+#endif

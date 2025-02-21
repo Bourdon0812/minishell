@@ -6,8 +6,13 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:51:46 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/02/20 15:51:48 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/02/21 02:12:13 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	exe_env(t_shell *shell)
+{
+	return ;
+}
