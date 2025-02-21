@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:28:29 by yseguin           #+#    #+#             */
-/*   Updated: 2025/02/21 02:07:52 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/02/21 02:21:15 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@
 /* struct */
 typedef struct s_shell
 {
-    int     running;    // 1 si le shell fonctionne, 0 sinon
-	char    *input;          // La commande en cours d'exécution
-    char    **cmd;         // Tableau des arguments de la commande
-	char    **envp;        // Tableau des variables d'environnement
-}   t_shell;
+	int		running; // 1 si le shell fonctionne, 0 sinon
+	char	*input; //  La commande en cours d'exécution
+	char	**cmd; //   Tableau des arguments de la commande
+	char	**envp; //  Tableau des variables d'environnement
+}	t_shell;
 
 #endif
