@@ -1,20 +1,20 @@
 NAME = minishell
 CC = gcc
-CFLAGS = 
-SRC =
+CFLAGS = -Wall -Werror -Wextra
+SRC = src/main.c
 OBJ = $(SRC:%.c=obj/%.o)
 
 LIBFT_PATH = libft
 LIBFT_FILE = $(LIBFT_PATH)/libft.a
+READLINE_LIB = -lreadline
 
 all: $(NAME)
 
 $(NAME): $(LIBFT_FILE) $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT_FILE) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT_FILE) $(READLINE_LIB) -o $(NAME)
 
 $(LIBFT_FILE):
 	make -C $(LIBFT_PATH)
-
 
 clean:
 	rm -rf ./obj

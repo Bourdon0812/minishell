@@ -6,7 +6,7 @@
 /*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:28:29 by yseguin           #+#    #+#             */
-/*   Updated: 2025/02/18 16:29:33 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/02/25 12:48:05 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,8 @@
 /* lib readline */
 # include <readline/readline.h>
 # include <readline/history.h>
+
+/* libft */
+# include "../libft/libft.h"
 
 #endif
