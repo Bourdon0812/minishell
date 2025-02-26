@@ -6,7 +6,7 @@
 /*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:28:29 by yseguin           #+#    #+#             */
-/*   Updated: 2025/02/25 12:48:05 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/02/26 19:34:29 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,16 @@
 /* libft */
 # include "../libft/libft.h"
 
+/* struct */
+typedef struct s_shell
+{
+	int		running; // 1 si le shell fonctionne, 0 sinon
+	char	*input; //  La commande en cours d'exécution
+	char	**cmd; //   Tableau des arguments de la commande
+	char	**envp; //  Tableau des variables d'environnement
+}	t_shell;
+
+/* color */
+# define GREEN "\033[0;32m"
+# define RESET "\033[0m"
 #endif
