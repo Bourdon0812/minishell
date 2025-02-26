@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.h                                         :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 18:04:09 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/02/21 02:07:54 by ilbonnev         ###   ########.fr       */
+/*   Created: 2025/02/20 15:51:51 by ilbonnev          #+#    #+#             */
+/*   Updated: 2025/02/21 02:12:16 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTOR_H
-# define EXECUTOR_H
+#include "../includes/minishell.h"
 
-void	exe_command(t_shell *shell);
-
-#endif
+void	exe_export(t_shell *shell)
+{
+	return ;
+}

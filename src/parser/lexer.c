@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.h                                         :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 18:04:09 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/02/21 02:07:54 by ilbonnev         ###   ########.fr       */
+/*   Created: 2025/02/21 01:41:49 by ilbonnev          #+#    #+#             */
+/*   Updated: 2025/02/21 02:14:32 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTOR_H
-# define EXECUTOR_H
+#include "../includes/minishell.h"
 
-void	exe_command(t_shell *shell);
-
-#endif
+/* TODO call by main */
+void	lexer(t_shell *shell, char *input)
+{
+	return ;
+}
