@@ -6,18 +6,16 @@
 /*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/02/26 20:03:53 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/02/27 12:50:23 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#include <signal.h>
 
 void	handle_sigint(int sig)
 {
 	(void)sig;
-	rl_on_new_line(); 
-	printf("\n" GREEN "minishell> " RESET);
+	write(STDOUT_FILENO, GREEN "\nminishell> " RESET, 23);
 	rl_redisplay();
 }
 
