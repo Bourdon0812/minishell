@@ -3,25 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:28:29 by yseguin           #+#    #+#             */
-/*   Updated: 2025/02/21 02:21:15 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/03/01 14:53:37 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-
-/* project header */
-# include "builtins.h"
-# include "executor.h"
-# include "parser.h"
-# include "signals.h"
-# include "utils.h"
-
-/* libft */
-# include "../libft/libft.h"
 
 /* lib c */
 # include <stdio.h>
@@ -53,4 +43,15 @@ typedef struct s_shell
 	char	**envp; //  Tableau des variables d'environnement
 }	t_shell;
 
+/* libs */
+# include "../libft/libft.h"
+# include "builtins.h"
+# include "executor.h"
+# include "parser.h"
+# include "signals.h"
+# include "utils.h"
+
+/* color */
+# define GREEN "\033[0;32m"
+# define RESET "\033[0m"
 #endif
