@@ -6,7 +6,7 @@
 /*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/01 14:53:42 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/01 15:08:35 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,22 +79,24 @@ int	input_act(char **input)
 
 ///////////////////////////////////////////////////////////////////////////////
 // Main function, start the soft.
-int	main(int ac, char **av)
+int	main(int ac, char **av, char **env)
 {
-	char	*input;
 	int		check;
+	t_shell	datas;
 
 	signal(SIGINT, handle_sigint);
 	while (1)
 	{
-		check = check_args(ac, av, &input);
+		datas.running = 1;
+		datas.envp = env;
+		check = check_args(ac, av, &(datas.input));
 		if (check == 2)
 			return (0);
 		else if (check == 0)
 			return (ft_printf("Error wrong args\n"), 1);
 		else
 		{
-			if (!input_act(&input))
+			if (!input_act(&(datas.input)))
 				break ;
 		}
 	}
