@@ -6,7 +6,7 @@
 /*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:28:29 by yseguin           #+#    #+#             */
-/*   Updated: 2025/02/27 12:09:11 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/01 14:53:37 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-/* libft */
-# include "../libft/libft.h"
-
 /* struct */
 typedef struct s_shell
 {
@@ -45,6 +42,14 @@ typedef struct s_shell
 	char	**cmd; //   Tableau des arguments de la commande
 	char	**envp; //  Tableau des variables d'environnement
 }	t_shell;
+
+/* libs */
+# include "../libft/libft.h"
+# include "builtins.h"
+# include "executor.h"
+# include "parser.h"
+# include "signals.h"
+# include "utils.h"
 
 /* color */
 # define GREEN "\033[0;32m"

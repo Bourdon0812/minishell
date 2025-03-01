@@ -6,7 +6,7 @@
 /*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/02/28 15:15:28 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/01 14:53:42 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,7 @@ int	input_act(char **input)
 		return (0);
 	}
 	if (**input != '\0')
-	{
 		add_history(*input);
-		write_history(".minishell_history");
-	}
 	free(*input);
 	rl_replace_line("", 0);
 	*input = readline(GREEN "minishell> " RESET);
