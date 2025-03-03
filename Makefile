@@ -1,7 +1,7 @@
 NAME = minishell
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra 
-SRC = src/main.c
+SRC = src/main.c src/binaries/launch_bin.c
 OBJ = $(SRC:%.c=obj/%.o)
 
 LIBFT_PATH = libft

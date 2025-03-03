@@ -6,7 +6,7 @@
 /*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/01 15:08:35 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/03 13:08:36 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	check_args(int ac, char **av, char **input)
 
 ///////////////////////////////////////////////////////////////////////////////
 // function for the input actions (clean, addHistory, readline, etc)
-int	input_act(char **input)
+int	input_act(char **input, char **env)
 {
 	if (*input == NULL)
 		return (0);
@@ -96,7 +96,7 @@ int	main(int ac, char **av, char **env)
 			return (ft_printf("Error wrong args\n"), 1);
 		else
 		{
-			if (!input_act(&(datas.input)))
+			if (!input_act(&(datas.input), env))
 				break ;
 		}
 	}

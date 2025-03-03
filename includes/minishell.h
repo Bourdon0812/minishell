@@ -6,7 +6,7 @@
 /*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:28:29 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/01 14:53:37 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/03 12:58:25 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_shell
 # include "parser.h"
 # include "signals.h"
 # include "utils.h"
+# include "binaries.h"
 
 /* color */
 # define GREEN "\033[0;32m"
