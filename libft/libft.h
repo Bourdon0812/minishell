@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:57:52 by yseguin           #+#    #+#             */
-/*   Updated: 2025/01/29 11:02:48 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/03 17:51:09 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,7 @@ void	ft_lstadd_front(t_list **alst, t_list *new);
 
 int		ft_printf(const char *str, ...);
 char	*get_next_line(int fd);
+int		ft_strcmp(char *s1, char *s2);
+char	*ft_strstr(const char *haystack, const char *needle);
 
 #endif

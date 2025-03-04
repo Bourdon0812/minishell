@@ -6,11 +6,11 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:38:12 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/02/21 02:10:03 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/03/04 17:17:50 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	is_builtins(char *str)
 {
@@ -34,4 +34,36 @@ int	is_builtins(char *str)
 		i++;
 	}
 	return (0);
+}
+
+int	ft_iswsp(int c)
+{
+	return (
+		c == ' '
+		|| c == '\t'
+		|| c == '\n'
+		|| c == '\r'
+		|| c == '\v'
+		|| c == '\f'
+	);
+}
+
+int	is_quote(char c)
+{
+	return (c == '\'' || c == '"');
+}
+
+int	has_pipe(char *input)
+{
+	return (ft_strstr(input, "|") != NULL);
+}
+
+int	has_redirection(char *input)
+{
+	return (
+		ft_strstr(input, ">") != NULL
+		|| ft_strstr(input, ">>") != NULL
+		|| ft_strstr(input, "<") != NULL
+		|| ft_strstr(input, "<<") != NULL
+	);
 }
