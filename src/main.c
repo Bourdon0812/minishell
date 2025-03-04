@@ -83,7 +83,6 @@ int	main(int ac, char **av, char **env)
 {
 	int		check;
 	t_shell	shell;
-	/*
 	signal(SIGINT, handle_sigint);
 	while (1)
 	{
@@ -100,8 +99,10 @@ int	main(int ac, char **av, char **env)
 				break ;
 			lexer(&shell);
 		}
-	}*/
-	shell.input = strdup("\"e\"\"c\"ho test");
+	}
+	/*
+	shell.input = strdup("echo 'a bc' | coucou 21" );
 	lexer(&shell);
+	*/
 	return (0);
 }

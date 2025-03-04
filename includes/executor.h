@@ -16,6 +16,7 @@
 typedef struct s_shell t_shell;
 
 /* executor.c */
-void	exe_command(t_shell *shell);
+void	complex_command(t_shell *shell);
+void	simple_command(t_shell *shell);
 
 #endif
