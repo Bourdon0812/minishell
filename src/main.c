@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/04 17:32:12 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:26:41 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	main(int ac, char **av, char **env)
 			return (ft_printf("Error wrong args\n"), 1);
 		else
 		{
-			if (!input_act(&(datas.input), env))
+			if (!input_act(&(shell.input), env))
 				break ;
 			lexer(&shell);
 		}
