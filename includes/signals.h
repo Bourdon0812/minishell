@@ -6,11 +6,13 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:15 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/02/21 02:07:45 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:58:31 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SIGNALS_H
 # define SIGNALS_H
+
+typedef struct s_shell t_shell;
 
 #endif

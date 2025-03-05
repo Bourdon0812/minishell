@@ -6,11 +6,11 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:41:11 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/02/21 02:09:58 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:36:27 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	exe_builtins(t_shell *shell)
 {

@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 15:51:33 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/03 16:47:57 by ilbonnev         ###   ########.fr       */
+/*   Created: 2025/03/03 17:37:18 by ilbonnev          #+#    #+#             */
+/*   Updated: 2025/03/03 17:37:45 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-
-void	exe_unset(t_shell *shell)
+int	ft_strcmp(char *s1, char *s2)
 {
-	return ;
+	while (*s1 && (*s1 == *s2))
+	{
+		s1++;
+		s2++;
+	}
+	return ((unsigned char)*s1 - (unsigned char)*s2);
 }

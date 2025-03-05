@@ -6,12 +6,14 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:07 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/02/21 02:07:58 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:58:25 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
+
+typedef struct s_shell t_shell;
 
 /* builtins.c */
 void	exe_builtins(t_shell *shell);

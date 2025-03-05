@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:28:29 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/03 12:58:25 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/03 13:02:28 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@
 # include <sys/ioctl.h>
 # include <curses.h>
 # include <term.h>
+
+/* libs */
+# include "../libft/libft.h"
+# include "builtins.h"
+# include "executor.h"
+# include "parser.h"
+# include "signals.h"
+# include "utils.h"
 
 /* lib readline */
 # include <readline/readline.h>

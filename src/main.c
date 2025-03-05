@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/03 13:08:36 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/04 17:32:12 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	handle_sigint(int sig)
 	(void)sig;
 	write(STDOUT_FILENO, "\n", 1);
 	rl_on_new_line();
-	rl_replace_line("", 0);
+	//rl_replace_line("", 0);
 	rl_redisplay();
 }
 
@@ -70,7 +70,7 @@ int	input_act(char **input, char **env)
 	if (**input != '\0')
 		add_history(*input);
 	free(*input);
-	rl_replace_line("", 0);
+	//rl_replace_line("", 0);
 	*input = readline(GREEN "minishell> " RESET);
 	if (*input == NULL)
 		return (0);
@@ -82,14 +82,13 @@ int	input_act(char **input, char **env)
 int	main(int ac, char **av, char **env)
 {
 	int		check;
-	t_shell	datas;
-
+	t_shell	shell;
 	signal(SIGINT, handle_sigint);
 	while (1)
 	{
-		datas.running = 1;
-		datas.envp = env;
-		check = check_args(ac, av, &(datas.input));
+		shell.running = 1;
+		shell.envp = env;
+		check = check_args(ac, av, &(shell.input));
 		if (check == 2)
 			return (0);
 		else if (check == 0)
@@ -98,7 +97,12 @@ int	main(int ac, char **av, char **env)
 		{
 			if (!input_act(&(datas.input), env))
 				break ;
+			lexer(&shell);
 		}
 	}
+	/*
+	shell.input = strdup("echo 'a bc' | coucou 21" );
+	lexer(&shell);
+	*/
 	return (0);
 }

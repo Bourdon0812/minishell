@@ -1,7 +1,13 @@
 NAME = minishell
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra 
-SRC = src/main.c src/binaries/launch_bin.c
+CFLAGS = -g #-Wall -Werror -Wextra 
+
+SRC = $(wildcard src/*.c) \
+      $(wildcard src/builtins/*.c) \
+      $(wildcard src/executor/*.c) \
+      $(wildcard src/parser/*.c) \
+      $(wildcard src/signals/*.c) \
+      $(wildcard src/utils/*.c) 
 OBJ = $(SRC:%.c=obj/%.o)
 
 LIBFT_PATH = libft
