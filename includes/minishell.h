@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:28:29 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/03 13:02:28 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:47:23 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 
 /* libs */
 # include "../libft/libft.h"
+# include "structs.h"
 # include "builtins.h"
 # include "executor.h"
 # include "parser.h"
@@ -41,15 +42,6 @@
 /* lib readline */
 # include <readline/readline.h>
 # include <readline/history.h>
-
-/* struct */
-typedef struct s_shell
-{
-	int		running; // 1 si le shell fonctionne, 0 sinon
-	char	*input; //  La commande en cours d'exécution
-	char	**cmd; //   Tableau des arguments de la commande
-	char	**envp; //  Tableau des variables d'environnement
-}	t_shell;
 
 /* libs */
 # include "../libft/libft.h"

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:07 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/03 16:58:25 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:47:41 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-typedef struct s_shell t_shell;
+typedef struct s_shell	t_shell;
 
 /* builtins.c */
 void	exe_builtins(t_shell *shell);

@@ -6,7 +6,7 @@
 /*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/05 15:26:41 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/05 15:38:14 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	main(int ac, char **av, char **env)
 {
 	int		check;
 	t_shell	shell;
+	
 	signal(SIGINT, handle_sigint);
 	while (1)
 	{

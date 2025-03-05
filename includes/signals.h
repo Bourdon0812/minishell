@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:15 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/03 16:58:31 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:47:54 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SIGNALS_H
 # define SIGNALS_H
 
-typedef struct s_shell t_shell;
+typedef struct s_shell	t_shell;
 
 #endif

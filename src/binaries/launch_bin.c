@@ -6,7 +6,7 @@
 /*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 13:36:54 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/03 12:56:02 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/05 15:31:25 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ char	*search_path(char *cmd, char **env)
 
 ///////////////////////////////////////////////////////////////////////////////
 // function for execute the cmd in a selected fd from a selected fd
-void	binaries_in_out(char **cmd, int infd, int outfd, char **env)
+void	binaries_in_out(t_shell *shell, int infd, int outfd)
 {
 	char	*cmd_path;
 
-	cmd_path = search_path(cmd[0], env);
+	cmd_path = search_path(shell->cmd[0], shell->envp);
 	cmd_path[ft_strlen(cmd_path) - 1] = '\0';
 	dup2(infd, STDIN_FILENO);
 	dup2(outfd, STDOUT_FILENO);
-	execve(cmd_path, cmd, env);
+	execve(cmd_path, shell->cmd, shell->envp);
 	perror("execve");
 	free(cmd_path);
 	exit(1);
