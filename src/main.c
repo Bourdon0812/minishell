@@ -58,7 +58,7 @@ int	check_args(int ac, char **av, char **input)
 
 ///////////////////////////////////////////////////////////////////////////////
 // function for the input actions (clean, addHistory, readline, etc)
-int	input_act(char **input)
+int	input_act(char **input, char **env)
 {
 	if (*input == NULL)
 		return (0);
@@ -95,7 +95,7 @@ int	main(int ac, char **av, char **env)
 			return (ft_printf("Error wrong args\n"), 1);
 		else
 		{
-			if (!input_act(&(shell.input)))
+			if (!input_act(&(datas.input), env))
 				break ;
 			lexer(&shell);
 		}

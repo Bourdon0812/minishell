@@ -51,6 +51,15 @@ typedef struct s_shell
 	char	**envp; //  Tableau des variables d'environnement
 }	t_shell;
 
+/* libs */
+# include "../libft/libft.h"
+# include "builtins.h"
+# include "executor.h"
+# include "parser.h"
+# include "signals.h"
+# include "utils.h"
+# include "binaries.h"
+
 /* color */
 # define GREEN "\033[0;32m"
 # define RESET "\033[0m"

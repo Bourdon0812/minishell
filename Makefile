@@ -8,7 +8,6 @@ SRC = $(wildcard src/*.c) \
       $(wildcard src/parser/*.c) \
       $(wildcard src/signals/*.c) \
       $(wildcard src/utils/*.c) 
-
 OBJ = $(SRC:%.c=obj/%.o)
 
 LIBFT_PATH = libft
