@@ -6,7 +6,7 @@
 /*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:37:44 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/10 14:08:45 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/10 14:57:09 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,10 @@ void	simple_command(t_shell *shell)
 	if (is_builtins(shell->cmd[0]))
 		exe_builtins(shell);
 	else
-		launch_bin(shell);
+	{
+		if (check_cmd(shell) == 0)
+			ft_printf("%s : command not found\n", shell->cmd[0]);
+		else
+			launch_bin(shell);
+	}
 }

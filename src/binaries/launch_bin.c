@@ -6,7 +6,7 @@
 /*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 13:36:54 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/10 14:08:55 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/10 14:57:40 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,17 @@ void	launch_bin(t_shell *shell)
 	}
 	else
 		waitpid(pid, &status, 0);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// function for check if the cmd is usable or not
+int	check_cmd(t_shell *shell)
+{
+	char	*path;
+
+	path = search_path(shell->cmd[0], shell->envp);
+	if (!path || *path == '\0')
+		return (free(path), 0);
+	else
+		return (free(path), 1);
 }
