@@ -6,7 +6,7 @@
 /*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 12:56:39 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/05 15:32:29 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/10 14:06:46 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 # define BINARIES_H
 
 /* function */
-void	binaries_in_out(t_shell *shell, int infd, int outfd);
+void	launch_bin(t_shell *shell);
 
 #endif
