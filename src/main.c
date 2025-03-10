@@ -6,7 +6,7 @@
 /*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/05 15:38:14 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/09 12:14:52 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	check_args(int ac, char **av, char **input)
 	else
 	{
 		if (!check_opt(ac, av))
-			*input = readline(GREEN "minishell> " RESET);
+				*input = readline(GREEN "Minishell> " RESET);
 		else
 		{
 			*input = av[2];
@@ -58,22 +58,22 @@ int	check_args(int ac, char **av, char **input)
 
 ///////////////////////////////////////////////////////////////////////////////
 // function for the input actions (clean, addHistory, readline, etc)
-int	input_act(char **input, char **env)
+int	input_act(t_shell *shell)
 {
-	if (*input == NULL)
+	if (shell->input == NULL)
 		return (0);
-	if (ft_strncmp(*input, "exit", 5) == 0)
+	if (ft_strncmp(shell->input, "exit", 5) == 0)
 	{
-		free(*input);
+		free(shell->input);
 		return (0);
 	}
-	if (**input != '\0')
-		add_history(*input);
-	free(*input);
+	if (shell->input[0] != '\0')
+		add_history(shell->input);
 	//rl_replace_line("", 0);
-	*input = readline(GREEN "minishell> " RESET);
-	if (*input == NULL)
+	if (shell->input == NULL)
 		return (0);
+	lexer(shell);
+	free(shell->input);
 	return (1);
 }
 
@@ -91,19 +91,14 @@ int	main(int ac, char **av, char **env)
 		shell.envp = env;
 		check = check_args(ac, av, &(shell.input));
 		if (check == 2)
-			return (0);
+			return (lexer(&shell), 0);
 		else if (check == 0)
 			return (ft_printf("Error wrong args\n"), 1);
 		else
 		{
-			if (!input_act(&(shell.input), env))
+			if (!input_act(&shell))
 				break ;
-			lexer(&shell);
 		}
 	}
-	/*
-	shell.input = strdup("echo 'a bc' | coucou 21" );
-	lexer(&shell);
-	*/
 	return (0);
 }

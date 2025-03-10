@@ -6,7 +6,7 @@
 /*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 13:36:54 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/05 15:31:25 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/10 14:57:40 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,36 @@ void	binaries_in_out(t_shell *shell, int infd, int outfd)
 	perror("execve");
 	free(cmd_path);
 	exit(1);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// function for execute a cmd in his own process and wait it.
+void	launch_bin(t_shell *shell)
+{
+	int	status;
+	int	pid;
+
+	pid = fork();
+	if (pid == -1)
+		ft_printf("Error\n");
+	if (pid == 0)
+	{
+		binaries_in_out(shell, STDIN_FILENO, STDOUT_FILENO);
+		exit(1);
+	}
+	else
+		waitpid(pid, &status, 0);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// function for check if the cmd is usable or not
+int	check_cmd(t_shell *shell)
+{
+	char	*path;
+
+	path = search_path(shell->cmd[0], shell->envp);
+	if (!path || *path == '\0')
+		return (free(path), 0);
+	else
+		return (free(path), 1);
 }
