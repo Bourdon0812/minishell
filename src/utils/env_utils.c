@@ -1,37 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export_utils.c                                     :+:      :+:    :+:   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:08:57 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/11 13:38:26 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/11 14:24:38 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-// Function for copy the env (needed for edit with export and unset)
-int	copy_env(t_shell *shell, char **env)
+// Function for obtain se length of env
+int	size_env(char **env)
 {
 	int	i;
-	int	count;
 
-	count = 0;
-	while (env[count])
-		count++;
-	shell->envp = malloc(sizeof(char *) * (count + 1));
-	if (!shell->envp)
+	i = 0;
+	while (env[i])
+		i++;
+	return (i);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Function for copy the env (needed for edit with export and unset)
+int	copy_env(char ***nenv, char **env, int size)
+{
+	int	i;
+
+	*nenv = malloc(sizeof(char *) * (size + 1));
+	if (!(*nenv))
 		return (0);
 	i = 0;
 	while (env[i])
 	{
-		shell->envp[i] = strdup(env[i]);
+		(*nenv)[i] = strdup(env[i]);
+		if (!(*nenv)[i])
+		{
+			while (--i >= 0)
+				free((*nenv)[i]);
+			free(*nenv);
+			return (0);
+		}
 		i++;
 	}
-	shell->envp[i] = NULL;
+	(*nenv)[i] = NULL;
 	return (1);
 }
 
@@ -53,4 +68,26 @@ void	print_env(t_shell *shell)
 			i++;
 		}
 	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Function for check if the given arg is valid for export
+int	is_valid_varname(char *name)
+{
+	int	i;
+	int	equal;
+
+	i = 0;
+	equal = 0;
+	if (!name || (!ft_isalpha(name[0]) && name[0] != '_'))
+		return (0);
+	while (name[i])
+	{
+		if (!equal && name[i] == '=')
+			equal = 1;
+		if (!ft_isalnum(name[i]) && name[i] != '_' && !equal)
+			return (0);
+		i++;
+	}
+	return (1);
 }
