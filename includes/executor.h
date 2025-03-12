@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:09 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/05 15:47:47 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/10 15:29:09 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 typedef struct s_shell	t_shell;
 
 /* executor.c */
-void	complex_command(t_shell *shell);
+void	complex_command(t_shell *shell, t_cmd *cmd);
 void	simple_command(t_shell *shell);
 
 #endif

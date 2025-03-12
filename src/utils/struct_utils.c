@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   struct_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/05 15:48:12 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/12 17:18:35 by ilbonnev         ###   ########.fr       */
+/*   Created: 2025/03/12 17:05:02 by ilbonnev          #+#    #+#             */
+/*   Updated: 2025/03/12 17:18:55 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
+#include "../../includes/minishell.h"
 
-typedef struct s_shell
+t_cmd	*new_cmd(void)
 {
-	int		running;
-	char	*input;
-	char	**cmd;
-	char	**envp;
-}	t_shell;
+	t_cmd	*cmd;
 
-typedef struct s_cmd {
-	char	**args;
-	char	*input_file;
-	char	*output_file;
-	char	*heredoc;
-	int		append;
-	int		pipe;
-	struct	s_cmd *next;
-}	t_cmd;
-
-#endif
+	cmd = malloc(sizeof(t_cmd));
+	if (cmd == NULL)
+		return (NULL);
+	cmd->args = NULL;
+	cmd->input_file = NULL;
+	cmd->output_file = NULL;
+	cmd->heredoc = NULL;
+	cmd->append = 0;
+	cmd->pipe = 0;
+	cmd->next = NULL;
+	return (cmd);
+}
