@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:41:49 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/11 14:24:15 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/13 10:51:03 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	count_args(char *input, int keep_quotes)
+int	count_args(char *input)
 {
 	int	i;
 	int	args;
@@ -77,7 +77,7 @@ char	**split_args(char *input, int keep_quotes)
 
 	end = 0;
 	k = -1;
-	cmd = malloc(sizeof(char *) * (count_args(input, keep_quotes) + 1));
+	cmd = malloc(sizeof(char *) * (count_args(input) + 1));
 	if (cmd == NULL)
 		return (NULL);
 	while (input[end] != '\0')
@@ -112,7 +112,7 @@ void	lexer(t_shell *shell)
 	if (shell->cmd == NULL || shell->cmd[0] == NULL)
 		return ;
 	if (has_redirection(shell->input) || has_pipe(shell->input))
-		complex_command(shell);
+		complex_command(shell, parsing(shell));
 	else
 		simple_command(shell);
 }

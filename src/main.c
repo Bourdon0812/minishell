@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/11 14:13:41 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/13 10:50:39 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	check_args(int ac, char **av, char **input)
 	else
 	{
 		if (!check_opt(ac, av))
-				*input = readline(GREEN "Minishell> " RESET);
+			*input = readline(GREEN "Minishell> " RESET);
 		else
 		{
 			*input = av[2];
@@ -83,7 +83,7 @@ int	main(int ac, char **av, char **env)
 {
 	int		check;
 	t_shell	shell;
-	
+
 	signal(SIGINT, handle_sigint);
 	if (copy_env(&(shell.envp), env, (size_env(env) + 1)) == 0)
 		return (ft_printf("Error with env\n"), 1);
