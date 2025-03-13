@@ -6,7 +6,7 @@
 /*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/09 12:14:52 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/11 14:13:41 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,11 @@ int	main(int ac, char **av, char **env)
 	t_shell	shell;
 	
 	signal(SIGINT, handle_sigint);
+	if (copy_env(&(shell.envp), env, (size_env(env) + 1)) == 0)
+		return (ft_printf("Error with env\n"), 1);
 	while (1)
 	{
 		shell.running = 1;
-		shell.envp = env;
 		check = check_args(ac, av, &(shell.input));
 		if (check == 2)
 			return (lexer(&shell), 0);

@@ -6,7 +6,7 @@
 /*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:41:49 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/05 15:33:34 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/11 14:24:15 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,20 @@ char	*get_arg(char *input, int start, int end, int keep_quotes)
 	return (arg);
 }
 
+void	split_args_p2(char *input, int *end)
+{
+	while (input[*end] != '\0' && !ft_iswsp(input[*end]))
+	{
+		if (input[*end] == '=' && is_quote(input[*end + 1]))
+		{
+			(*end)++;
+			skip_quotes(input, end, input[*end]);
+			break ;
+		}
+		(*end)++;
+	}
+}
+
 char	**split_args(char *input, int keep_quotes)
 {
 	char	**cmd;
@@ -74,9 +88,7 @@ char	**split_args(char *input, int keep_quotes)
 		if (is_quote(input[end]))
 			skip_quotes(input, &end, input[end]);
 		else
-			while (!ft_iswsp(input[end]) && input[end] != '\0'
-				&& !is_quote(input[end]))
-				end++;
+			split_args_p2(input, &end);
 		cmd[++k] = get_arg(input, start, end, keep_quotes);
 	}
 	cmd[++k] = NULL;
