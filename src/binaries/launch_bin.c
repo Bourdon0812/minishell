@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_bin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 13:36:54 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/11 13:57:37 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/14 13:52:00 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ char	*search_path(char *cmd, char **env)
 
 ///////////////////////////////////////////////////////////////////////////////
 // function for execute the cmd in a selected fd from a selected fd
-void	binaries_in_out(t_shell *shell, int infd, int outfd)
+void	binaries_in_out(t_shell *shell, char **cmd, int infd, int outfd)
 {
 	char	*cmd_path;
 
-	cmd_path = search_path(shell->cmd[0], shell->envp);
+	cmd_path = search_path(cmd[0], shell->envp);
 	cmd_path[ft_strlen(cmd_path) - 1] = '\0';
 	dup2(infd, STDIN_FILENO);
 	dup2(outfd, STDOUT_FILENO);
-	execve(cmd_path, shell->cmd, shell->envp);
+	execve(cmd_path, cmd, shell->envp);
 	perror("execve");
 	free(cmd_path);
 	exit(1);
@@ -59,7 +59,7 @@ void	binaries_in_out(t_shell *shell, int infd, int outfd)
 
 ///////////////////////////////////////////////////////////////////////////////
 // function for execute a cmd in his own process and wait it.
-void	launch_bin(t_shell *shell)
+void	launch_bin(t_shell *shell, char **cmd, int in, int out)
 {
 	int	status;
 	int	pid;
@@ -69,7 +69,7 @@ void	launch_bin(t_shell *shell)
 		ft_printf("Error\n");
 	if (pid == 0)
 	{
-		binaries_in_out(shell, STDIN_FILENO, STDOUT_FILENO);
+		binaries_in_out(shell, cmd, in, out);
 		exit(1);
 	}
 	else
@@ -78,11 +78,11 @@ void	launch_bin(t_shell *shell)
 
 ///////////////////////////////////////////////////////////////////////////////
 // function for check if the cmd is usable or not
-int	check_cmd(t_shell *shell)
+int	check_cmd(char **args, char **env)
 {
 	char	*path;
 
-	path = search_path(shell->cmd[0], shell->envp);
+	path = search_path(args[0], env);
 	if (!path || *path == '\0')
 		return (free(path), 0);
 	else

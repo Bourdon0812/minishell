@@ -6,7 +6,7 @@
 /*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 12:56:39 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/10 14:55:11 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/13 12:08:14 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define BINARIES_H
 
 /* function */
-void	launch_bin(t_shell *shell);
-int		check_cmd(t_shell *shell);
+void	launch_bin(t_shell *shell, char **cmd, int in, int out);
+int		check_cmd(char **args, char **env);
 
 #endif
