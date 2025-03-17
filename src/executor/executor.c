@@ -6,12 +6,14 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:37:44 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/17 15:48:15 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/17 15:53:54 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+///////////////////////////////////////////////////////////////////////////////
+// Function for select part 2
 void	good_rep_p2(t_shell *shell, t_cmd *cmd, int in, int out)
 {
 	int	*fd;
