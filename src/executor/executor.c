@@ -6,11 +6,23 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:37:44 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/14 13:53:14 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/17 15:48:15 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	good_rep_p2(t_shell *shell, t_cmd *cmd, int in, int out)
+{
+	int	*fd;
+
+	if (cmd->heredoc != NULL)
+	{
+		fd = ft_heredoc(cmd->heredoc);
+		in = fd[0];
+	}
+	launch_bin(shell, cmd->args, in, out);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Function for select the good in / out of the actual cmd
@@ -22,7 +34,7 @@ void	good_rep(t_shell *shell, t_cmd *cmd, int in, int out)
 	{
 		s_fd[0] = open(cmd->input_file, O_RDONLY);
 		if (s_fd[0] == -1)
-			return (perror("In error"), (void)0);
+			return (perror("Minishell :"), (void)0);
 	}
 	else
 		s_fd[0] = in;
@@ -40,7 +52,7 @@ void	good_rep(t_shell *shell, t_cmd *cmd, int in, int out)
 	}
 	else
 		s_fd[1] = out;
-	launch_bin(shell, cmd->args, s_fd[0], s_fd[1]);
+	good_rep_p2(shell, cmd, s_fd[0], s_fd[1]);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

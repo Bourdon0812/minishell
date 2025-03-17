@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:57:52 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/11 12:31:15 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/17 15:48:55 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,5 @@ char	*get_next_line(int fd);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strstr(const char *haystack, const char *needle);
 char	*ft_strndup(const char *s1, size_t n);
-
 
 #endif
