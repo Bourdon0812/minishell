@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:41:49 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/13 10:51:03 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/20 14:59:54 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void	lexer(t_shell *shell)
 	free(input_cpy);
 	if (shell->cmd == NULL || shell->cmd[0] == NULL)
 		return ;
+	clear_lexer(shell);
 	if (has_redirection(shell->input) || has_pipe(shell->input))
 		complex_command(shell, parsing(shell));
 	else
