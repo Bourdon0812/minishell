@@ -6,16 +6,23 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:13:15 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/17 15:46:07 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/20 15:03:04 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+void	handle_sig2(int sig)
+{
+	(void)sig;
+	// à compléter
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Function for start the heredoc (write session).
 void	execute_heredoc(char **input, char *end, int fd[2])
 {
+	signal(SIGINT, handle_sig2);
 	while (1)
 	{
 		*input = readline("heredoc> ");
