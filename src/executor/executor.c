@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:37:44 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/20 14:59:31 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/03/21 17:03:05 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,13 @@ void	good_rep_p2(t_shell *shell, t_cmd *cmd, int in, int out)
 
 	if (cmd->heredoc != NULL)
 	{
-		fd = ft_heredoc(cmd->heredoc);
+		fd = ft_heredoc(shell, cmd->heredoc);
 		in = fd[0];
 	}
-	launch_bin(shell, cmd->args, in, out);
+	if (g_signal != 130)
+		launch_bin(shell, cmd->args, in, out);
+	else
+		g_signal = 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
