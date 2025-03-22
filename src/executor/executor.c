@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:37:44 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/21 17:03:05 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/22 15:14:29 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,18 @@ void	good_rep_p2(t_shell *shell, t_cmd *cmd, int in, int out)
 		fd = ft_heredoc(shell, cmd->heredoc);
 		in = fd[0];
 	}
-	if (g_signal != 130)
-		launch_bin(shell, cmd->args, in, out);
-	else
-		g_signal = 0;
+	if (g_signal != EXIT_SIGINT)
+	{
+		if (is_builtins(cmd->args[0]))
+			exe_builtins(shell);
+		else
+		{
+			if (check_cmd(cmd->args, shell->envp) == 0)
+				ft_printf("%s : command not found\n", cmd->args[0]);
+			else
+				launch_bin(shell, cmd->args, in, out);
+		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -84,6 +92,8 @@ void	complex_command(t_shell *shell, t_cmd *cmd)
 	prev_fd = 0;
 	while (cmd)
 	{
+		if (g_signal == EXIT_SIGINT)
+			return (g_signal = NEUTRAL_SIGINT, (void)0);
 		if (check_cmd(cmd->args, shell->envp) == 0)
 			ft_printf("%s : command not found\n", cmd->args[0]);
 		else

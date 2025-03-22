@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 13:36:54 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/14 13:52:00 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/22 15:19:49 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char	*search_path(char *cmd, char **env)
 	if (pid == 0)
 	{
 		dup2(fd[1], STDOUT_FILENO);
+		dup2(fd[1], STDERR_FILENO);
 		close(fd[0]);
 		close(fd[1]);
 		execve("/usr/bin/which", (char *[]){"which", cmd, NULL}, env);
@@ -52,7 +53,6 @@ void	binaries_in_out(t_shell *shell, char **cmd, int infd, int outfd)
 	dup2(infd, STDIN_FILENO);
 	dup2(outfd, STDOUT_FILENO);
 	execve(cmd_path, cmd, shell->envp);
-	perror("execve");
 	free(cmd_path);
 	exit(1);
 }
@@ -61,19 +61,28 @@ void	binaries_in_out(t_shell *shell, char **cmd, int infd, int outfd)
 // function for execute a cmd in his own process and wait it.
 void	launch_bin(t_shell *shell, char **cmd, int in, int out)
 {
-	int	status;
-	int	pid;
+	int		status;
+	pid_t	pid;
 
 	pid = fork();
 	if (pid == -1)
-		ft_printf("Error\n");
+		return (ft_printf("Error\n"), (void)0);
 	if (pid == 0)
 	{
 		binaries_in_out(shell, cmd, in, out);
 		exit(1);
 	}
 	else
+	{
+		signal(SIGINT, SIG_IGN);
 		waitpid(pid, &status, 0);
+		ft_printf("\n");
+		signal(SIGINT, handle_sigint);
+		if (WIFEXITED(status))
+			shell->l_sig = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			shell->l_sig = 128 + WTERMSIG(status);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -81,10 +90,14 @@ void	launch_bin(t_shell *shell, char **cmd, int in, int out)
 int	check_cmd(char **args, char **env)
 {
 	char	*path;
+	int		is_valid;
 
 	path = search_path(args[0], env);
-	if (!path || *path == '\0')
-		return (free(path), 0);
-	else
-		return (free(path), 1);
+	if (!path)
+		return (0);
+	is_valid = 1;
+	if (ft_strncmp(path, "which: no ", 10) == 0)
+		is_valid = 0;
+	free(path);
+	return (is_valid);
 }

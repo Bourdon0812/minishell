@@ -6,74 +6,62 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:13:15 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/21 17:05:01 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/22 15:19:42 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	event(void)
-{
-	return (1);
-}
-
-void	handle_sig2(int sig)
-{
-	rl_replace_line("", 0);
-	rl_redisplay();
-	rl_done = 1;
-	g_signal = 130;
-}
-
 ///////////////////////////////////////////////////////////////////////////////
-// Function for start the heredoc (write session).
-void	execute_heredoc(t_shell *shell, char **input, char *end, int fd[2])
-{
-	rl_event_hook = event;
-	signal(SIGINT, handle_sig2);
-	while (1)
-	{
-		if (g_signal == 130)
-			return (close(fd[1]), shell->l_sig = 130, (void)0);
-		*input = readline("heredoc> ");
-		if (!(*input) || g_signal == 130)
-		{
-			free(*input);
-			close(fd[1]);
-			return ;
-		}
-		if (ft_strcmp(*input, end) == 0)
-		{
-			free(*input);
-			close(fd[1]);
-			return ;
-		}
-		write(fd[1], *input, strlen(*input));
-		write(fd[1], "\n", 1);
-		free(*input);
-	}
-}
-
-///////////////////////////////////////////////////////////////////////////////
-// Function that open a textfield that ended by writing "end" and send the 
-// result to the actual cmd.
-int	*ft_heredoc(t_shell *shell, char *end)
+// Function that writes user input to the heredoc until delimiter is found
+void	execute_heredoc(char *end, int fd[2])
 {
 	char	*input;
+
+	signal(SIGINT, SIG_DFL);
+	while (1)
+	{
+		input = readline("heredoc> ");
+		if (!input)
+			break ;
+		if (ft_strcmp(input, end) == 0)
+		{
+			free(input);
+			break ;
+		}
+		write(fd[1], input, ft_strlen(input));
+		write(fd[1], "\n", 1);
+		free(input);
+	}
+	close(fd[1]);
+	exit(0);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Function that handles forking and signal capture for heredoc processing
+int	*ft_heredoc(t_shell *shell, char *end)
+{
 	int		*fd;
+	pid_t	pid;
+	int		status;
 
 	fd = malloc(sizeof(int) * 2);
-	if (!fd)
+	if (!fd || pipe(fd) == -1)
+		return (perror("heredoc"), free(fd), NULL);
+	pid = fork();
+	if (pid == -1)
+		return (perror("fork"), free(fd), NULL);
+	if (pid == 0)
+		execute_heredoc(end, fd);
+	close(fd[1]);
+	signal(SIGINT, SIG_IGN);
+	waitpid(pid, &status, 0);
+	ft_printf("\n");
+	signal(SIGINT, handle_sigint);
+	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
 	{
-		perror("malloc");
-		exit(EXIT_FAILURE);
+		g_signal = EXIT_SIGINT;
+		shell->l_sig = EXIT_SIGINT;
 	}
-	if (pipe(fd) == -1)
-	{
-		perror("pipe");
-		free(fd);
-		exit(EXIT_FAILURE);
-	}
-	execute_heredoc(shell, &input, end, fd);
 	return (fd);
 }

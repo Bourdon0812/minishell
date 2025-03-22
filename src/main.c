@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/21 17:05:27 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/22 15:13:08 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ int	main(int ac, char **av, char **env)
 		return (ft_printf("Error with env\n"), 1);
 	while (1)
 	{
-		shell.l_sig = 0;
+		shell.l_sig = NEUTRAL_SIGINT;
+		g_signal = NEUTRAL_SIGINT;
 		check = check_args(ac, av, &(shell.input));
 		if (check == 2)
 			return (lexer(&shell), 0);
