@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:13 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/12 17:11:27 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/03/23 15:44:40 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ typedef struct s_shell	t_shell;
 /* lexer.c */
 int		count_args(char *input);
 char	*get_arg(char *input, int start, int end, int keep_quotes);
+int		split_args_p2(char *input, int end);
 char	**split_args(char *input, int keep_quotes);
 void	lexer(t_shell *shell);
 

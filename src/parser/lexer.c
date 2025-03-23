@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:41:49 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/20 14:59:54 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/03/23 15:43:30 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,16 @@ int	count_args(char *input)
 
 	i = 0;
 	args = 0;
-	while (input[i] != '\0')
+	while (input[i])
 	{
 		while (ft_iswsp(input[i]))
 			i++;
-		if (input[i] == '\0')
+		if (!input[i])
 			break ;
 		args++;
 		if (is_quote(input[i]))
 			skip_quotes(input, &i, input[i]);
-		while (input[i] != '\0'
-			&& !ft_iswsp(input[i])
-			&& !is_quote(input[i])
-		)
+		while (input[i] && !ft_iswsp(input[i]) && !is_quote(input[i]))
 			i++;
 	}
 	return (args);
@@ -40,32 +37,21 @@ int	count_args(char *input)
 char	*get_arg(char *input, int start, int end, int keep_quotes)
 {
 	char	*arg;
-	char	*arg_clean;
 
 	arg = ft_substr(input, start, end - start);
-	if (arg == NULL)
-		return (NULL);
-	if (keep_quotes == 0)
-	{
-		arg_clean = remove_quotes(arg);
-		free(arg);
-		return (arg_clean);
-	}
-	return (arg);
+	return (clean_arg(arg, keep_quotes));
 }
 
-void	split_args_p2(char *input, int *end)
+int	split_args_p2(char *input, int end)
 {
-	while (input[*end] != '\0' && !ft_iswsp(input[*end]))
+	while (input[end] && !ft_iswsp(input[end]))
 	{
-		if (input[*end] == '=' && is_quote(input[*end + 1]))
-		{
-			(*end)++;
-			skip_quotes(input, end, input[*end]);
+		handle_assignment(input, &end);
+		if (!input[end])
 			break ;
-		}
-		(*end)++;
+		end++;
 	}
+	return (end);
 }
 
 char	**split_args(char *input, int keep_quotes)
@@ -78,17 +64,17 @@ char	**split_args(char *input, int keep_quotes)
 	end = 0;
 	k = -1;
 	cmd = malloc(sizeof(char *) * (count_args(input) + 1));
-	if (cmd == NULL)
+	if (!cmd)
 		return (NULL);
-	while (input[end] != '\0')
+	while (input[end])
 	{
-		while (ft_iswsp(input[end]) && input[end] != '\0')
+		while (ft_iswsp(input[end]) && input[end])
 			end++;
 		start = end;
 		if (is_quote(input[end]))
-			skip_quotes(input, &end, input[end]);
+			end = parse_argument(input, end);
 		else
-			split_args_p2(input, &end);
+			end = split_args_p2(input, end);
 		cmd[++k] = get_arg(input, start, end, keep_quotes);
 	}
 	cmd[++k] = NULL;
@@ -100,16 +86,16 @@ void	lexer(t_shell *shell)
 	int		keep_quotes;
 	char	*input_cpy;
 
-	if (shell->input == NULL)
+	if (!shell->input)
 		return ;
 	input_cpy = ft_strdup(shell->input);
-	if (input_cpy == NULL)
+	if (!input_cpy)
 		return ;
 	keep_quotes = (!ft_strncmp(shell->input, "echo", 4)
 			&& (shell->input[4] == ' ' || shell->input[4] == '\0'));
 	shell->cmd = split_args(input_cpy, keep_quotes);
 	free(input_cpy);
-	if (shell->cmd == NULL || shell->cmd[0] == NULL)
+	if (!shell->cmd || !shell->cmd[0])
 		return ;
 	clear_lexer(shell);
 	if (has_redirection(shell->input) || has_pipe(shell->input))

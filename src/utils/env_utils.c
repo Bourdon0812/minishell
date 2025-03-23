@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:08:57 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/11 14:24:38 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/23 15:47:23 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,17 @@ int	is_valid_varname(char *name)
 		i++;
 	}
 	return (1);
+}
+
+char	*get_env_value(char *env_var)
+{
+	char	*env_val;
+
+	if (env_var[0] == '$' && env_var[1] != '\0')
+	{
+		env_val = getenv(&env_var[1]);
+		if (env_val)
+			return (ft_strdup(env_val));
+	}
+	return (NULL);
 }

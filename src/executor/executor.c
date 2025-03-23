@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:37:44 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/20 14:59:31 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/03/20 15:47:40 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	complex_command(t_shell *shell, t_cmd *cmd)
 void	simple_command(t_shell *shell)
 {
 	if (is_builtins(shell->cmd[0]))
-		exe_builtins(shell);
+		exe_builtins(shell, shell->cmd);
 	else
 	{
 		if (check_cmd(shell->cmd, shell->envp) == 0)
