@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:48:12 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/17 15:50:19 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/21 17:05:53 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 typedef struct s_shell
 {
-	int		running;
+	int		l_sig;
 	char	*input;
 	char	**cmd;
 	char	**envp;

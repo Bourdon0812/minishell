@@ -6,11 +6,13 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/13 10:50:39 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/22 15:13:08 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+sig_atomic_t	g_signal = 0;
 
 ///////////////////////////////////////////////////////////////////////////////
 // rewrite shell for ctrl c
@@ -19,7 +21,7 @@ void	handle_sigint(int sig)
 	(void)sig;
 	write(STDOUT_FILENO, "\n", 1);
 	rl_on_new_line();
-	//rl_replace_line("", 0);
+	rl_replace_line("", 0);
 	rl_redisplay();
 }
 
@@ -69,7 +71,7 @@ int	input_act(t_shell *shell)
 	}
 	if (shell->input[0] != '\0')
 		add_history(shell->input);
-	//rl_replace_line("", 0);
+	rl_replace_line("", 0);
 	if (shell->input == NULL)
 		return (0);
 	lexer(shell);
@@ -89,7 +91,8 @@ int	main(int ac, char **av, char **env)
 		return (ft_printf("Error with env\n"), 1);
 	while (1)
 	{
-		shell.running = 1;
+		shell.l_sig = NEUTRAL_SIGINT;
+		g_signal = NEUTRAL_SIGINT;
 		check = check_args(ac, av, &(shell.input));
 		if (check == 2)
 			return (lexer(&shell), 0);

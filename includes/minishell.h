@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <yseguin@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:28:29 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/05 15:47:23 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/22 14:56:21 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,12 @@
 /* color */
 # define GREEN "\033[0;32m"
 # define RESET "\033[0m"
+
+/* signals */
+# define NEUTRAL_SIGINT 0
+# define EXIT_SIGINT 130
+# define EXIT_SIGQUIT 131
+
+extern sig_atomic_t	g_signal;
+void	handle_sigint(int sig);
 #endif
