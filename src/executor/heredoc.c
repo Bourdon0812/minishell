@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:13:15 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/22 15:19:42 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/26 14:07:31 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ int	*ft_heredoc(t_shell *shell, char *end)
 	close(fd[1]);
 	signal(SIGINT, SIG_IGN);
 	waitpid(pid, &status, 0);
-	ft_printf("\n");
 	signal(SIGINT, handle_sigint);
 	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
 	{
 		g_signal = EXIT_SIGINT;
 		shell->l_sig = EXIT_SIGINT;
+		ft_printf("\n");
 	}
 	return (fd);
 }
