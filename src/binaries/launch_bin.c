@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 13:36:54 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/22 15:19:49 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/26 14:12:09 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,14 @@ void	launch_bin(t_shell *shell, char **cmd, int in, int out)
 	{
 		signal(SIGINT, SIG_IGN);
 		waitpid(pid, &status, 0);
-		ft_printf("\n");
 		signal(SIGINT, handle_sigint);
 		if (WIFEXITED(status))
 			shell->l_sig = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
+		{
 			shell->l_sig = 128 + WTERMSIG(status);
+			ft_printf("\n");
+		}
 	}
 }
 

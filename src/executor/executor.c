@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:37:44 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/20 15:47:40 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/03/26 13:57:22 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	good_rep_p2(t_shell *shell, t_cmd *cmd, int in, int out)
 	if (g_signal != EXIT_SIGINT)
 	{
 		if (is_builtins(cmd->args[0]))
-			exe_builtins(shell);
+			exe_builtins(shell, cmd->args);
 		else
 		{
 			if (check_cmd(cmd->args, shell->envp) == 0)
