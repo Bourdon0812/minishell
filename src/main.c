@@ -6,24 +6,13 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/26 14:07:44 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/27 14:40:07 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 sig_atomic_t	g_signal = 0;
-
-///////////////////////////////////////////////////////////////////////////////
-// rewrite shell for ctrl c
-void	handle_sigint(int sig)
-{
-	(void)sig;
-	write(STDOUT_FILENO, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 // check if the -c is here
@@ -87,6 +76,7 @@ int	main(int ac, char **av, char **env)
 	t_shell	shell;
 
 	signal(SIGINT, handle_sigint);
+	signal(SIGQUIT, handle_sigquit);
 	if (copy_env(&(shell.envp), env, (size_env(env) + 1)) == 0)
 		return (ft_printf("Error with env\n"), 1);
 	while (1)
