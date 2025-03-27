@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:16 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/23 15:47:33 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/03/27 15:37:33 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		size_env(char **env);
 int		copy_env(char ***nenv, char **env, int size);
 int		is_valid_varname(char *name);
 void	print_env(t_shell *shell);
-char	*get_env_value(char *env_var);
+char	*get_env_value(char *env_var, t_shell *shell);
 
 /* struct_utils.c */
 t_cmd	*new_cmd(void);

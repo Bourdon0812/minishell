@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/26 14:07:44 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/27 14:52:51 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	handle_sigint(int sig)
 	(void)sig;
 	write(STDOUT_FILENO, "\n", 1);
 	rl_on_new_line();
-	rl_replace_line("", 0);
+	//rl_replace_line("", 0);
 	rl_redisplay();
 }
 
@@ -71,7 +71,7 @@ int	input_act(t_shell *shell)
 	}
 	if (shell->input[0] != '\0')
 		add_history(shell->input);
-	rl_replace_line("", 0);
+	//rl_replace_line("", 0);
 	if (shell->input == NULL)
 		return (0);
 	lexer(shell);
