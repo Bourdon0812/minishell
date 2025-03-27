@@ -6,11 +6,11 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:38:25 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/27 14:38:56 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/27 14:42:03 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 // rewrite shell for ctrl c
