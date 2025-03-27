@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:51:49 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/20 15:45:26 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:28:28 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,12 @@
 
 void	exe_exit(t_shell *shell, char **args)
 {
-	return ;
+	if (args[1])
+	{
+		exit(ft_atoi(tab[1]));
+	}
+	else
+	{
+		exit(0);
+	}
 }
