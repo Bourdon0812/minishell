@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/27 16:01:20 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/31 16:18:16 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	input_act(t_shell *shell)
 	}
 	if (shell->input[0] != '\0')
 		add_history(shell->input);
-	rl_replace_line("", 0);
+	//rl_replace_line("", 0);
 	if (shell->input == NULL)
 		return (0);
 	lexer(shell);
