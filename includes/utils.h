@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:16 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/31 18:30:21 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/31 18:35:02 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		size_env(char **env);
 int		copy_env(char ***nenv, char **env, int size);
 int		is_valid_varname(char *name);
 void	print_env(t_shell *shell);
-char	*get_env_value(char *env_var);
+char	*get_env_value(char *env_var, t_shell *shell);
 char	*my_getenv(char *name, char **env);
 
 /* struct_utils.c */

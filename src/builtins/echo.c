@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 15:53:08 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/31 18:33:45 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/03/31 18:35:33 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ int	skip_n_flags(char **args, int *newline_flag)
 	return (i);
 }
 
-void	print_argument(char *arg)
+void	print_argument(char *arg, t_shell *shell)
 {
 	char	*env_value;
 	char	*clean_arg;
 
 	if (arg[0] == '$')
 	{
-		env_value = get_env_value(arg);
+		env_value = get_env_value(arg, shell);
 		if (env_value)
 		{
 			write(1, env_value, ft_strlen(env_value));
@@ -102,7 +102,7 @@ void	exe_echo(t_shell *shell, char **args)
 	i = skip_n_flags(args, &newline_flag);
 	while (args[i])
 	{
-		print_argument(args[i]);
+		print_argument(args[i], shell);
 		if (args[i + 1])
 			write(1, " ", 1);
 		i++;
