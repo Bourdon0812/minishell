@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:48:12 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/21 17:05:53 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/01 14:19:29 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,14 @@ typedef struct s_cmd
 	int				pipe;
 	struct s_cmd	*next;
 }	t_cmd;
+
+typedef struct s_exec_ctx
+{
+	pid_t	pids[1024];
+	int		i;
+	pid_t	last;
+	int		prev;
+	int		fd[2];
+}	t_exec_ctx;
 
 #endif

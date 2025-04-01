@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:07 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/20 15:47:20 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:33:05 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define BUILTINS_H
 
 typedef struct s_shell	t_shell;
+
+/* fork builtIns for pip*/
+pid_t	fork_buitins(t_shell *shell, char **cmd, int in, int out);
 
 /* builtins.c */
 void	exe_builtins(t_shell *shell, char **args);

@@ -6,53 +6,23 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 13:36:54 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/31 18:30:38 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/01 14:01:32 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-// function for obtain the path of a binaries
-char	*search_path(char *cmd, char **env)
-{
-	int		i;
-	char	*exec;
-	char	**allpath;
-	char	*path_part;
-	char	**s_cmd;
-
-	i = -1;
-	allpath = ft_split(my_getenv("PATH", env), ':');
-	s_cmd = ft_split(cmd, ' ');
-	while (allpath[++i])
-	{
-		path_part = ft_strjoin(allpath[i], "/");
-		exec = ft_strjoin(path_part, s_cmd[0]);
-		free(path_part);
-		if (access(exec, F_OK | X_OK) == 0)
-		{
-			ft_free_tab(s_cmd);
-			return (exec);
-		}
-		free(exec);
-	}
-	ft_free_tab(allpath);
-	ft_free_tab(s_cmd);
-	return (NULL);
-}
-
-///////////////////////////////////////////////////////////////////////////////
 // function for execute the cmd in a selected fd from a selected fd
-void	binaries_in_out(char **envp, char **cmd, int infd, int outfd)
+void	binaries_in_out(t_shell *shell, char **cmd, int infd, int outfd)
 {
 	char	*cmd_path;
 
-	cmd_path = search_path(cmd[0], envp);
+	cmd_path = search_path(cmd[0], shell);
 	cmd_path[ft_strlen(cmd_path)] = '\0';
 	dup2(infd, STDIN_FILENO);
 	dup2(outfd, STDOUT_FILENO);
-	execve(cmd_path, cmd, envp);
+	execve(cmd_path, cmd, shell->envp);
 	free(cmd_path);
 	if (infd != STDIN_FILENO)
 		close(infd);
@@ -64,7 +34,7 @@ void	binaries_in_out(char **envp, char **cmd, int infd, int outfd)
 void	wait_all(pid_t pid, pid_t last_pid, t_shell *shell)
 {
 	int	status;
-	
+
 	signal(SIGINT, SIG_IGN);
 	waitpid(pid, &status, 0);
 	signal(SIGINT, handle_sigint);
@@ -91,22 +61,24 @@ pid_t	launch_bin(t_shell *shell, char **cmd, int in, int out)
 		return (ft_printf("Error\n"), -1);
 	if (pid == 0)
 	{
-		binaries_in_out(shell->envp, cmd, in, out);
+		binaries_in_out(shell, cmd, in, out);
 		exit(1);
 	}
-	return pid;
+	return (pid);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 // function for check if the cmd is usable or not
-int	check_cmd(char **args, char **env)
+int	check_cmd(char **args, t_shell *shell)
 {
 	char	*path;
 
-
-	path = search_path(args[0], env);
+	path = search_path(args[0], shell);
 	if (!path)
+	{
+		ft_printf("Minishell: %s: command not found\n", args[0]);
 		return (0);
+	}
 	free(path);
 	return (1);
 }

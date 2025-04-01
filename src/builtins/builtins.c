@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:41:11 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/20 15:46:15 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:32:18 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+pid_t	fork_buitins(t_shell *shell, char **cmd, int in, int out)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == -1)
+		return (ft_printf("Error\n"), -1);
+	if (pid == 0)
+	{
+		dup2(in, STDIN_FILENO);
+		dup2(out, STDOUT_FILENO);
+		exe_builtins(shell, cmd);
+		exit(1);
+	}
+	return (pid);
+}
 
 void	exe_builtins(t_shell *shell, char **args)
 {
