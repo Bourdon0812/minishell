@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:51:51 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/20 15:45:32 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:24:31 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	start_exp(int i, t_shell *shell)
 
 ///////////////////////////////////////////////////////////////////////////////
 // function for export a list of args (type VAR="the value")
-void	exe_export(t_shell *shell, char **args)
+int	exe_export(t_shell *shell, char **args)
 {
 	int		i;
 	char	*temp;
@@ -104,4 +104,5 @@ void	exe_export(t_shell *shell, char **args)
 			start_exp(i, shell);
 		i++;
 	}
+	return (0);
 }

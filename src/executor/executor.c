@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:37:44 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/01 14:19:49 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/01 16:23:53 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 // Function for wait all process in complex_cmd
-void	wait_children(pid_t *pids, pid_t last, int count, t_shell *shell)
+static void	wait_children(pid_t *pids, pid_t last, int count, t_shell *shell)
 {
 	int	i;
 
@@ -28,13 +28,18 @@ void	wait_children(pid_t *pids, pid_t last, int count, t_shell *shell)
 
 ///////////////////////////////////////////////////////////////////////////////
 // Function for select the good action in complex_cmd
-void	handle_command_node(t_shell *shell, t_cmd *cmd, t_exec_ctx *ctx)
+static void	handle_command_node(t_shell *shell, t_cmd *cmd, t_exec_ctx *ctx)
 {
+	pid_t	pid;
+
 	if (cmd->next)
-		ctx->pids[ctx->i] = good_with_pip(shell, cmd, &ctx->prev, ctx->fd);
+		pid = good_with_pip(shell, cmd, &ctx->prev, ctx->fd);
 	else
-		ctx->pids[ctx->i] = good_rep(shell, cmd, ctx->prev, STDOUT_FILENO);
-	ctx->last = ctx->pids[ctx->i];
+		pid = good_rep(shell, cmd, ctx->prev, STDOUT_FILENO);
+	if (pid == -1)
+		return ;
+	ctx->pids[ctx->i] = pid;
+	ctx->last = pid;
 	ctx->i++;
 }
 
@@ -48,7 +53,7 @@ void	complex_command(t_shell *shell, t_cmd *cmd)
 	ctx.prev = 0;
 	while (cmd)
 	{
-		if (g_signal == EXIT_SIGINT)
+		if (g_signal != NEUTRAL_SIGINT)
 		{
 			g_signal = NEUTRAL_SIGINT;
 			return ;

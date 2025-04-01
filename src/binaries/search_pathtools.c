@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 13:49:41 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/01 14:34:50 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/01 17:05:54 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 // init and check args before search_path, and return error if needed
-int	init_path_search(char *cmd, t_shell *shell, char ***paths, char ***args)
+static int	init_path_search(char *c, t_shell *s, char ***p, char ***args)
 {
 	char	*tmp;
 
-	if (!cmd || !shell)
+	if (!c || !s)
 		return (0);
-	tmp = get_env_value("$PATH", shell);
+	tmp = get_env_value("$PATH", s);
 	if (!tmp)
 		return (0);
-	*paths = ft_split(tmp, ':');
+	*p = ft_split(tmp, ':');
 	free(tmp);
-	if (!*paths)
+	if (!*p)
 		return (0);
-	*args = ft_split(cmd, ' ');
+	*args = ft_split(c, ' ');
 	if (!*args)
-		return (ft_free_tab(*paths), 0);
+		return (ft_free_tab(*p), 0);
 	return (1);
 }
 

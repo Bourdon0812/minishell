@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:04:21 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/01 14:34:49 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/01 16:17:48 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,22 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 // Function for select part 2
-pid_t	good_rep_p2(t_shell *shell, t_cmd *cmd, int in, int out)
+static pid_t	good_rep_p2(t_shell *shell, t_cmd *cmd, int in, int out)
 {
 	int	*fd;
 
 	if (cmd->heredoc != NULL)
 	{
 		fd = ft_heredoc(shell, cmd->heredoc);
+		if (!fd)
+			return (g_signal = EXIT_SIGINT, -1);
 		in = fd[0];
+		free(fd);
 	}
 	if (g_signal != EXIT_SIGINT)
 	{
 		if (is_builtins(cmd->args[0]))
-			fork_buitins(shell, cmd->args, in, out);
+			return (fork_buitins(shell, cmd->args, in, out));
 		else
 		{
 			if (check_cmd(cmd->args, shell) == 0)

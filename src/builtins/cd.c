@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:51:40 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/31 17:27:33 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:22:17 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	update_env(t_shell *shell, char *key, char *new_value)
 	}
 }
 
-void	exe_cd(t_shell *shell, char **args)
+int	exe_cd(t_shell *shell, char **args)
 {
 	char	*new_path;
 	char	*old_pwd;
@@ -50,12 +50,13 @@ void	exe_cd(t_shell *shell, char **args)
 	if (new_path == NULL || chdir(new_path) != 0)
 	{
 		perror("cd");
-		return ;
+		return (1);
 	}
 	old_pwd = getcwd(NULL, 0);
 	if (old_pwd == NULL)
-		return ;
+		return (1);
 	update_env(shell, "OLDPWD", getenv("PWD"));
 	update_env(shell, "PWD", old_pwd);
 	free(old_pwd);
+	return (0);
 }

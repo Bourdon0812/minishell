@@ -3,24 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:51:46 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/31 16:39:06 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:23:02 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	exe_env(t_shell *shell, char **args)
+int	exe_env(t_shell *shell, char **args)
 {
 	int	i;
 
 	(void)args;
 	i = -1;
 	if (!(shell->envp))
-		return ;
+		return (1);
 	while (shell->envp[++i])
 		if (ft_strchr(shell->envp[i], '='))
 			ft_printf("%s\n", shell->envp[i]);
+	return (0);
 }

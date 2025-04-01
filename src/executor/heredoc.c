@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:13:15 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/26 14:07:31 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/01 17:07:01 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 // Function that writes user input to the heredoc until delimiter is found
-void	execute_heredoc(char *end, int fd[2])
+static void	execute_heredoc(char *end, int fd[2])
 {
 	char	*input;
 
@@ -59,9 +59,11 @@ int	*ft_heredoc(t_shell *shell, char *end)
 	signal(SIGINT, handle_sigint);
 	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
 	{
-		g_signal = EXIT_SIGINT;
-		shell->l_sig = EXIT_SIGINT;
-		ft_printf("\n");
+		g_signal = 128 + WTERMSIG(status);
+		shell->l_sig = 128 + WTERMSIG(status);
+		close(fd[0]);
+		free(fd);
+		return (NULL);
 	}
 	return (fd);
 }

@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/01 14:03:11 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/01 16:27:14 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ sig_atomic_t	g_signal = 0;
 
 ///////////////////////////////////////////////////////////////////////////////
 // check if the -c is here
-int	check_opt(int ac, char **av)
+static int	check_opt(int ac, char **av)
 {
 	if (ac == 3)
 	{
@@ -28,7 +28,7 @@ int	check_opt(int ac, char **av)
 
 ///////////////////////////////////////////////////////////////////////////////
 // control args (good, wrong, with -c without etc).
-int	check_args(int ac, char **av, char **input)
+static int	check_args(int ac, char **av, char **input)
 {
 	if (ac == 2 || ac > 3)
 		return (0);
@@ -49,7 +49,7 @@ int	check_args(int ac, char **av, char **input)
 
 ///////////////////////////////////////////////////////////////////////////////
 // function for the input actions (clean, addHistory, readline, etc)
-int	input_act(t_shell *shell)
+static int	input_act(t_shell *shell)
 {
 	if (shell->input == NULL)
 		return (0);
@@ -78,11 +78,11 @@ int	main(int ac, char **av, char **env)
 	disable_slprint();
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, handle_sigquit);
+	signal(SIGPIPE, SIG_DFL);
 	if (copy_env(&(shell.envp), env, (size_env(env) + 1)) == 0)
 		return (ft_printf("Error with env\n"), 1);
 	while (1)
 	{
-		shell.l_sig = NEUTRAL_SIGINT;
 		g_signal = NEUTRAL_SIGINT;
 		check = check_args(ac, av, &(shell.input));
 		if (check == 2)

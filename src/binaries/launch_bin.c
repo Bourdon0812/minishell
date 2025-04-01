@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 13:36:54 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/01 14:01:32 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/01 17:06:34 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,32 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 // function for execute the cmd in a selected fd from a selected fd
-void	binaries_in_out(t_shell *shell, char **cmd, int infd, int outfd)
+static void	binaries_in_out(t_shell *shell, char **cmd, int infd, int outfd)
 {
 	char	*cmd_path;
+	int		i;
 
 	cmd_path = search_path(cmd[0], shell);
 	cmd_path[ft_strlen(cmd_path)] = '\0';
 	dup2(infd, STDIN_FILENO);
 	dup2(outfd, STDOUT_FILENO);
-	execve(cmd_path, cmd, shell->envp);
-	free(cmd_path);
 	if (infd != STDIN_FILENO)
 		close(infd);
 	if (outfd != STDOUT_FILENO)
 		close(outfd);
+	i = 3;
+	while (i < 1024)
+	{
+		close(i);
+		i++;
+	}
+	execve(cmd_path, cmd, shell->envp);
+	free(cmd_path);
 	exit(1);
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// Function for wait all pid
 void	wait_all(pid_t pid, pid_t last_pid, t_shell *shell)
 {
 	int	status;
