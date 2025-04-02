@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:37:44 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/01 16:23:53 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/02 15:58:21 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ void	complex_command(t_shell *shell, t_cmd *cmd)
 			g_signal = NEUTRAL_SIGINT;
 			return ;
 		}
-		if (check_cmd(cmd->args, shell) != 0)
-			handle_command_node(shell, cmd, &ctx);
+		handle_command_node(shell, cmd, &ctx);
 		cmd = cmd->next;
 	}
 	if (ctx.prev != 0)
