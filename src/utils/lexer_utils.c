@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 14:33:49 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/23 15:46:37 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:02:32 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,17 @@ int	parse_argument(char *input, int end)
 	if (input[end] == quote)
 		end++;
 	return (split_args_p2(input, end));
+}
+
+void	ft_free_tab(char **to_clean)
+{
+	size_t	i;
+
+	i = 0;
+	while (to_clean[i])
+	{
+		free(to_clean[i]);
+		i++;
+	}
+	free(to_clean);
 }

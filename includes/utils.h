@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:16 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/27 15:37:33 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/01 13:35:00 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,5 @@ void	clear_lexer(t_shell *shell);
 int		parse_argument(char *input, int end);
 void	handle_assignment(char *input, int *end);
 char	*clean_arg(char *arg, int keep_quotes);
+void	ft_free_tab(char **to_clean);
 #endif

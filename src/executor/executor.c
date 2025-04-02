@@ -6,120 +6,84 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:37:44 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/01 16:52:00 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:23:53 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-// Function for select part 2
-void	good_rep_p2(t_shell *shell, t_cmd *cmd, int in, int out)
+// Function for wait all process in complex_cmd
+static void	wait_children(pid_t *pids, pid_t last, int count, t_shell *shell)
 {
-	int	*fd;
+	int	i;
 
-	if (cmd->heredoc != NULL)
+	i = 0;
+	while (i < count)
 	{
-		fd = ft_heredoc(shell, cmd->heredoc);
-		in = fd[0];
-	}
-	if (g_signal != EXIT_SIGINT)
-	{
-		if (is_builtins(cmd->args[0]))
-			exe_builtins(shell, cmd->args);
-		else
-		{
-			if (check_cmd(cmd->args, shell->envp) == 0)
-				ft_printf("%s : command not found\n", cmd->args[0]);
-			else
-				launch_bin(shell, cmd->args, in, out);
-		}
+		wait_all(pids[i], last, shell);
+		i++;
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// Function for select the good in / out of the actual cmd
-void	good_rep(t_shell *shell, t_cmd *cmd, int in, int out)
+// Function for select the good action in complex_cmd
+static void	handle_command_node(t_shell *shell, t_cmd *cmd, t_exec_ctx *ctx)
 {
-	int	s_fd[2];
+	pid_t	pid;
 
-	if (cmd->input_file)
-	{
-		s_fd[0] = open(cmd->input_file, O_RDONLY);
-		if (s_fd[0] == -1)
-			return (perror("Minishell :"), (void)0);
-	}
+	if (cmd->next)
+		pid = good_with_pip(shell, cmd, &ctx->prev, ctx->fd);
 	else
-		s_fd[0] = in;
-	if (cmd->output_file && cmd->append)
-	{
-		s_fd[1] = open(cmd->output_file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		if (s_fd[1] == -1)
-			return (perror("Out error"), close(s_fd[0]), (void)0);
-	}
-	else if (cmd->output_file && !cmd->append)
-	{
-		s_fd[1] = open(cmd->output_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (s_fd[1] == -1)
-			return (perror("Out error"), close(s_fd[0]), (void)0);
-	}
-	else
-		s_fd[1] = out;
-	good_rep_p2(shell, cmd, s_fd[0], s_fd[1]);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-// Function for open a pip and save him before good_rep function
-void	good_with_pip(t_shell *shell, t_cmd *cmd, int *prev_fd, int fd[2])
-{
-	if (pipe(fd) == -1)
-	{
-		perror("pipe");
-		exit(1);
-	}
-	good_rep(shell, cmd, *prev_fd, fd[1]);
-	close(fd[1]);
-	*prev_fd = fd[0];
+		pid = good_rep(shell, cmd, ctx->prev, STDOUT_FILENO);
+	if (pid == -1)
+		return ;
+	ctx->pids[ctx->i] = pid;
+	ctx->last = pid;
+	ctx->i++;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 // Function for complexe command
 void	complex_command(t_shell *shell, t_cmd *cmd)
 {
-	int	fd[2];
-	int	prev_fd;
+	t_exec_ctx	ctx;
 
-	prev_fd = 0;
+	ctx.i = 0;
+	ctx.prev = 0;
 	while (cmd)
 	{
-		if (g_signal == EXIT_SIGINT)
-			return (g_signal = NEUTRAL_SIGINT, (void)0);
-		if (check_cmd(cmd->args, shell->envp) == 0)
-			ft_printf("%s : command not found\n", cmd->args[0]);
-		else
+		if (g_signal != NEUTRAL_SIGINT)
 		{
-			if (cmd->next)
-				good_with_pip(shell, cmd, &prev_fd, fd);
-			else
-				good_rep(shell, cmd, prev_fd, STDOUT_FILENO);
+			g_signal = NEUTRAL_SIGINT;
+			return ;
 		}
+		if (check_cmd(cmd->args, shell) != 0)
+			handle_command_node(shell, cmd, &ctx);
 		cmd = cmd->next;
 	}
-	if (prev_fd != 0)
-		close(prev_fd);
+	if (ctx.prev != 0)
+		close(ctx.prev);
+	wait_children(ctx.pids, ctx.last, ctx.i, shell);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 // Function for the single command without >>, <, | 
 void	simple_command(t_shell *shell)
 {
+	pid_t	pid;
+	int		status;
+
 	if (is_builtins(shell->cmd[0]))
 		exe_builtins(shell, shell->cmd);
 	else
 	{
-		if (check_cmd(shell->cmd, shell->envp) == 0)
-			ft_printf("%s : command not found\n", shell->cmd[0]);
+		if (check_cmd(shell->cmd, shell) == 0)
+			return ;
 		else
-			launch_bin(shell, shell->cmd, STDIN_FILENO, STDOUT_FILENO);
+		{
+			pid = launch_bin(shell, shell->cmd, STDIN_FILENO, STDOUT_FILENO);
+			wait_all(pid, pid, shell);
+		}
 	}
 }

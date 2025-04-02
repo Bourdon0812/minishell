@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/27 14:52:51 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:27:14 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,8 @@
 sig_atomic_t	g_signal = 0;
 
 ///////////////////////////////////////////////////////////////////////////////
-// rewrite shell for ctrl c
-void	handle_sigint(int sig)
-{
-	(void)sig;
-	write(STDOUT_FILENO, "\n", 1);
-	rl_on_new_line();
-	//rl_replace_line("", 0);
-	rl_redisplay();
-}
-
-///////////////////////////////////////////////////////////////////////////////
 // check if the -c is here
-int	check_opt(int ac, char **av)
+static int	check_opt(int ac, char **av)
 {
 	if (ac == 3)
 	{
@@ -39,7 +28,7 @@ int	check_opt(int ac, char **av)
 
 ///////////////////////////////////////////////////////////////////////////////
 // control args (good, wrong, with -c without etc).
-int	check_args(int ac, char **av, char **input)
+static int	check_args(int ac, char **av, char **input)
 {
 	if (ac == 2 || ac > 3)
 		return (0);
@@ -60,7 +49,7 @@ int	check_args(int ac, char **av, char **input)
 
 ///////////////////////////////////////////////////////////////////////////////
 // function for the input actions (clean, addHistory, readline, etc)
-int	input_act(t_shell *shell)
+static int	input_act(t_shell *shell)
 {
 	if (shell->input == NULL)
 		return (0);
@@ -71,7 +60,7 @@ int	input_act(t_shell *shell)
 	}
 	if (shell->input[0] != '\0')
 		add_history(shell->input);
-	//rl_replace_line("", 0);
+	rl_replace_line("", 0);
 	if (shell->input == NULL)
 		return (0);
 	lexer(shell);
@@ -86,12 +75,14 @@ int	main(int ac, char **av, char **env)
 	int		check;
 	t_shell	shell;
 
+	disable_slprint();
 	signal(SIGINT, handle_sigint);
+	signal(SIGQUIT, handle_sigquit);
+	signal(SIGPIPE, SIG_DFL);
 	if (copy_env(&(shell.envp), env, (size_env(env) + 1)) == 0)
 		return (ft_printf("Error with env\n"), 1);
 	while (1)
 	{
-		shell.l_sig = NEUTRAL_SIGINT;
 		g_signal = NEUTRAL_SIGINT;
 		check = check_args(ac, av, &(shell.input));
 		if (check == 2)

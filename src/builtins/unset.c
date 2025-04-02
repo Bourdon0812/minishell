@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:51:33 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/27 16:45:33 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:27:24 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ void	rm_var(t_shell *shell, char *var)
 	}
 }
 
-void	exe_unset(t_shell *shell, char **args)
+int	exe_unset(t_shell *shell, char **args)
 {
 	int	i;
 
 	i = 0;
 	while (args[++i])
 		rm_var(shell, args[i]);
-	return ;
+	return (0);
 }

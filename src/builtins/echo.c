@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 15:53:08 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/27 15:37:38 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:22:40 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	print_argument(char *arg, t_shell *shell)
 	}
 }
 
-void	exe_echo(t_shell *shell, char **args)
+int	exe_echo(t_shell *shell, char **args)
 {
 	int	i;
 	int	newline_flag;
@@ -109,4 +109,5 @@ void	exe_echo(t_shell *shell, char **args)
 	}
 	if (newline_flag)
 		write(1, "\n", 1);
+	return (0);
 }
