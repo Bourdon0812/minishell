@@ -22,7 +22,8 @@ t_cmd	*new_cmd(void)
 	cmd->args = NULL;
 	cmd->input_file = NULL;
 	cmd->output_file = NULL;
-	cmd->heredoc = NULL;
+	cmd->heredocs = NULL;
+	cmd->heredoc_count = 0;
 	cmd->append = 0;
 	cmd->pipe = 0;
 	cmd->next = NULL;

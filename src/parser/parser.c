@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 17:12:37 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/12 17:18:40 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/04 16:06:49 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,6 @@ void	add_argument(t_cmd *cmd, char *arg)
 		return ;
 	}
 	allocate_and_copy_args(cmd, arg);
-}
-
-void	handle_redirections(t_cmd *cmd, char **cmds, int *i)
-{
-	if (!ft_strcmp(cmds[*i], "<") && cmds[*i + 1])
-		cmd->input_file = ft_strdup(cmds[++(*i)]);
-	else if (!ft_strcmp(cmds[*i], ">") && cmds[*i + 1])
-	{
-		cmd->output_file = ft_strdup(cmds[++(*i)]);
-		cmd->append = 0;
-	}
-	else if (!ft_strcmp(cmds[*i], ">>") && cmds[*i + 1])
-	{
-		cmd->output_file = ft_strdup(cmds[++(*i)]);
-		cmd->append = 1;
-	}
-	else if (!ft_strcmp(cmds[*i], "<<") && cmds[*i + 1])
-		cmd->heredoc = ft_strdup(cmds[++(*i)]);
-	else
-		ft_putstr_fd("Minishell: erreur de syntaxe\n", 2);
 }
 
 int	check_syntax_errors(char **cmds)

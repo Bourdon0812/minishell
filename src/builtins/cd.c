@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:51:40 by ilbonnev          #+#    #+#             */
 /*   Updated: 2025/04/04 17:04:50 by yseguin          ###   ########.fr       */
@@ -36,13 +36,28 @@ static void	update_env(t_shell *shell, char *key, char *new_value)
 	}
 }
 
+int	has_home(t_shell *shell)
+{
+	int	i;
+
+	i = -1;
+	while (shell->envp[++i] != NULL)
+		if (ft_strncmp((const char *)shell->envp[i], "HOME", 4) != 0)
+			return (1);
+	return (0);
+}
+
 int	exe_cd(t_shell *shell, char **args)
 {
 	char	*new_path;
 	char	*old_pwd;
 
 	if (args[1] == NULL || !ft_strcmp(args[1], "~"))
+	{
 		new_path = getenv("HOME");
+		if (has_home(shell) == 1)
+			return (0);
+	}
 	else if (!ft_strcmp(args[1], "-"))
 		new_path = getenv("OLDPWD");
 	else
