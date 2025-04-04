@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:13 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/23 15:44:40 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/04 16:07:20 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,8 @@ void	add_argument(t_cmd *cmd, char *arg);
 void	handle_redirections(t_cmd *cmd, char **cmds, int *i);
 int		check_syntax_errors(char **cmds);
 t_cmd	*parsing(t_shell *shell);
+
+/* redirection.c */
+void	handle_redirections(t_cmd *cmd, char **cmds, int *i);
 
 #endif

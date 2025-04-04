@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:48:12 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/01 14:19:29 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/04 16:14:40 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ typedef struct s_cmd
 	char			**args;
 	char			*input_file;
 	char			*output_file;
-	char			*heredoc;
+	char			**heredocs;
+	int				heredoc_count;
 	int				append;
 	int				pipe;
 	struct s_cmd	*next;

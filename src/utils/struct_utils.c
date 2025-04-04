@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:05:02 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/12 17:18:55 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/03 18:27:40 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ t_cmd	*new_cmd(void)
 	cmd->args = NULL;
 	cmd->input_file = NULL;
 	cmd->output_file = NULL;
-	cmd->heredoc = NULL;
+	cmd->heredocs = NULL;
+	cmd->heredoc_count = 0;
 	cmd->append = 0;
 	cmd->pipe = 0;
 	cmd->next = NULL;
