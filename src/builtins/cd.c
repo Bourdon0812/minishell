@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:51:40 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/04 16:17:15 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/04 16:19:39 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	exe_cd(t_shell *shell, char **args)
 	{
 		new_path = getenv("HOME");
 		if (has_home(shell) == 1)
-			return ;
+			return (0);
 	}
 	else if (!ft_strcmp(args[1], "-"))
 		new_path = getenv("OLDPWD");
