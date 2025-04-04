@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:04:21 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/02 17:01:20 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/04 17:04:38 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ pid_t	good_with_pip(t_shell *shell, t_cmd *cmd, int *prev_fd, int fd[2])
 	}
 	pid = good_rep(shell, cmd, *prev_fd, fd[1]);
 	close(fd[1]);
+	if (*prev_fd != STDIN_FILENO)
+		close(*prev_fd);
 	*prev_fd = fd[0];
 	return (pid);
 }

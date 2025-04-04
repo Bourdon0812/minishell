@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 13:36:54 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/02 16:59:50 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/04 17:04:55 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@
 static void	binaries_in_out(t_shell *shell, char **cmd, int infd, int outfd)
 {
 	char	*cmd_path;
+	int		fd;
 	int		i;
 
-	cmd_path = search_path(cmd[0], shell);
+	i = 0;
+	cmd_path = search_path(cmd[0], shell, i);
 	cmd_path[ft_strlen(cmd_path)] = '\0';
 	dup2(infd, STDIN_FILENO);
 	dup2(outfd, STDOUT_FILENO);
@@ -27,11 +29,13 @@ static void	binaries_in_out(t_shell *shell, char **cmd, int infd, int outfd)
 		close(infd);
 	if (outfd != STDOUT_FILENO)
 		close(outfd);
-	i = 3;
-	while (i < 1024)
+	fd = 0;
+	while (fd < 1024)
 	{
-		close(i);
-		i++;
+		if (fd != STDIN_FILENO && fd != STDOUT_FILENO && fd != STDERR_FILENO
+			&& fd != infd && fd != outfd)
+			close(fd);
+		fd++;
 	}
 	execve(cmd_path, cmd, shell->envp);
 	free(cmd_path);
@@ -81,8 +85,10 @@ pid_t	launch_bin(t_shell *shell, char **cmd, int in, int out)
 int	check_cmd(char **args, t_shell *shell)
 {
 	char	*path;
+	int		i;
 
-	path = search_path(args[0], shell);
+	i = 0;
+	path = search_path(args[0], shell, i);
 	if (!path)
 	{
 		ft_printf("Minishell: %s: command not found\n", args[0]);

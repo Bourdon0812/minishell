@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 13:49:41 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/01 17:05:54 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/04 17:04:53 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,30 @@ static int	init_path_search(char *c, t_shell *s, char ***p, char ***args)
 
 ///////////////////////////////////////////////////////////////////////////////
 // Search the good path for a cmd with the good method (not which xD)
-char	*search_path(char *cmd, t_shell *shell)
+char	*search_path(char *cmd, t_shell *shell, int i)
 {
-	int		i;
 	char	*tmp;
 	char	*bin;
 	char	**args;
 	char	**paths;
 
+	if (ft_strchr(cmd, '/'))
+	{
+		if (access(cmd, F_OK | X_OK) == 0)
+			return (ft_strdup(cmd));
+		return (NULL);
+	}
 	if (!init_path_search(cmd, shell, &paths, &args))
 		return (NULL);
-	i = -1;
-	while (paths[++i])
+	while (paths[i])
 	{
 		tmp = ft_strjoin(paths[i], "/");
 		bin = ft_strjoin(tmp, args[0]);
 		free(tmp);
-		if (!bin)
-			break ;
-		if (access(bin, F_OK | X_OK) == 0)
+		if (bin && access(bin, F_OK | X_OK) == 0)
 			return (ft_free_tab(paths), ft_free_tab(args), bin);
 		free(bin);
+		i++;
 	}
 	return (ft_free_tab(paths), ft_free_tab(args), NULL);
 }
