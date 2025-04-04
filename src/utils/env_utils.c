@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:08:57 by yseguin           #+#    #+#             */
-/*   Updated: 2025/03/27 15:38:17 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/04 17:15:07 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	copy_env(char ***nenv, char **env, int size)
 	i = 0;
 	while (env[i])
 	{
-		(*nenv)[i] = strdup(env[i]);
+		(*nenv)[i] = add_shlvl(env[i]);
 		if (!(*nenv)[i])
 		{
 			while (--i >= 0)

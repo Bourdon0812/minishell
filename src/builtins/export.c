@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:51:51 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/01 15:24:31 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/04 17:04:45 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,15 @@ int	var_is_in(char **env, char *path)
 
 ///////////////////////////////////////////////////////////////////////////////
 // start the good function for export (add ou update)
-void	start_exp(int i, t_shell *shell)
+void	start_exp(int i, t_shell *shell, char **args)
 {
 	int	in;
 
-	in = var_is_in(shell->envp, shell->cmd[i]);
+	in = var_is_in(shell->envp, args[i]);
 	if (in >= 0)
-		update_var(in, shell->envp, shell->cmd[i]);
+		update_var(in, shell->envp, args[i]);
 	else
-		add_var(shell, shell->cmd[i]);
+		add_var(shell, args[i]);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -87,21 +87,21 @@ int	exe_export(t_shell *shell, char **args)
 
 	i = 1;
 	print_env(shell);
-	while (shell->cmd[i])
+	while (args[i])
 	{
-		if (!ft_strchr(shell->cmd[i], '='))
+		if (!ft_strchr(args[i], '='))
 		{
-			temp = ft_strjoin(shell->cmd[i], "=''");
-			free(shell->cmd[i]);
-			shell->cmd[i] = temp;
+			temp = ft_strjoin(args[i], "=''");
+			free(args[i]);
+			args[i] = temp;
 		}
-		if (!is_valid_varname(shell->cmd[i]))
+		if (!is_valid_varname(args[i]))
 		{
 			ft_printf("Minishell: export: ");
-			ft_printf("%s : not a valid identifier\n", shell->cmd[i]);
+			ft_printf("%s : not a valid identifier\n", args[i]);
 		}
 		else
-			start_exp(i, shell);
+			start_exp(i, shell, args);
 		i++;
 	}
 	return (0);

@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   env_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 15:51:57 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/04 17:04:43 by yseguin          ###   ########.fr       */
+/*   Created: 2025/04/04 17:09:07 by yseguin           #+#    #+#             */
+/*   Updated: 2025/04/04 17:16:06 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	exe_pwd(t_shell *shell, char **args)
+char	*add_shlvl(char *env)
 {
-	char	cwd[4096];
+	char	*tmp;
+	char	*res;
 
-	(void)shell;
-	(void)args;
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
+	if (ft_strncmp(env, "SHLVL=", 6) == 0)
 	{
-		perror("pwd");
-		return (1);
+		tmp = ft_itoa(ft_atoi(env + 6) + 1);
+		if (!tmp)
+			return (ft_strdup(env));
+		res = ft_strjoin("SHLVL=", tmp);
+		free(tmp);
+		return (res);
 	}
-	ft_printf("%s\n", cwd);
-	return (1);
+	return (ft_strdup(env));
 }
