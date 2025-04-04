@@ -6,39 +6,54 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:04:21 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/04 17:04:38 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/04 17:30:02 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 ///////////////////////////////////////////////////////////////////////////////
+// Function for control multiple heredocs (<< a << b << c in this case a 
+// and b are useless but need to be start)
+static int	handle_all_heredocs(t_shell *shell, char **heredocs, int prev_fd)
+{
+	int		i;
+	int		*fd;
+	int		last_fd;
+
+	last_fd = prev_fd;
+	i = 0;
+	while (heredocs[i])
+	{
+		fd = ft_heredoc(shell, heredocs[i]);
+		if (!fd)
+			return (-1);
+		if (i > 0)
+			close(last_fd);
+		last_fd = fd[0];
+		free(fd);
+		i++;
+	}
+	return (last_fd);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 // Function for select part 2
 static pid_t	good_rep_p2(t_shell *shell, t_cmd *cmd, int in, int out)
 {
-	int	*fd;
-
-	if (cmd->heredoc != NULL)
+	if (cmd->heredocs)
 	{
-		fd = ft_heredoc(shell, cmd->heredoc);
-		if (!fd)
+		in = handle_all_heredocs(shell, cmd->heredocs, in);
+		if (in == -1)
 			return (g_signal = EXIT_SIGINT, -1);
-		in = fd[0];
-		free(fd);
 	}
-	if (g_signal != EXIT_SIGINT)
-	{
-		if (is_builtins(cmd->args[0]))
-			return (fork_buitins(shell, cmd->args, in, out));
-		else
-		{
-			if (check_cmd(cmd->args, shell) == 0)
-				return (-1);
-			else
-				return (launch_bin(shell, cmd->args, in, out));
-		}
-	}
-	return (-1);
+	if (g_signal == EXIT_SIGINT)
+		return (-1);
+	if (is_builtins(cmd->args[0]))
+		return (fork_buitins(shell, cmd->args, in, out));
+	if (!check_cmd(cmd->args, shell))
+		return (-1);
+	return (launch_bin(shell, cmd->args, in, out));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
