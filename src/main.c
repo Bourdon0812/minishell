@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/07 10:07:01 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/07 16:05:42 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,9 @@ static int	input_act(t_shell *shell)
 {
 	if (shell->input == NULL)
 		return (0);
-
 	if (shell->input[0] != '\0')
 		add_history(shell->input);
 	rl_replace_line("", 0);
-	if (shell->input == NULL)
-		return (0);
 	lexer(shell);
 	free(shell->input);
 	return (1);
@@ -87,7 +84,7 @@ int	main(int ac, char **av, char **env)
 		else
 		{
 			if (!input_act(&shell))
-				return (ft_printf("exit\n"), 0);
+				return (free_shell(&shell), ft_printf("exit\n"), 0);
 		}
 	}
 	return (0);

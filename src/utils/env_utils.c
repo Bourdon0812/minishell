@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:08:57 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/07 10:09:52 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/07 15:01:38 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ char	*get_env_value(char *env_var, t_shell *shell)
 	len = strlen(key);
 	if (env_var[0] == '$' && env_var[1] == '?' && env_var[2] == '\0')
 	{
-		return (ft_strdup(ft_itoa(shell->l_sig)));
+		return (ft_itoa(shell->l_sig));
 	}
 	i = 0;
 	while (envp[i])

@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:07 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/07 09:44:41 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/07 15:13:42 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ int		exe_unset(t_shell *shell, char **args);
 int		exe_env(t_shell *shell, char **args);
 
 /* exit.c */
-void	exe_exit(char **args);
+void	exe_exit(t_shell *shell, char **args);
 
 #endif
