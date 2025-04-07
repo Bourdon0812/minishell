@@ -6,12 +6,14 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:41:11 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/04 17:04:52 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/07 10:11:33 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+///////////////////////////////////////////////////////////////////////////////
+// Function for fork builtin if needed (with pip)
 pid_t	fork_buitins(t_shell *shell, char **cmd, int in, int out)
 {
 	pid_t	pid;
@@ -31,6 +33,8 @@ pid_t	fork_buitins(t_shell *shell, char **cmd, int in, int out)
 	return (pid);
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// Function for exec a builtIn in main process
 void	exe_builtins(t_shell *shell, char **args)
 {
 	int	val;
@@ -47,7 +51,7 @@ void	exe_builtins(t_shell *shell, char **args)
 	else if (ft_strcmp(args[0], "env") == 0)
 		val = exe_env(shell, args);
 	else if (ft_strcmp(args[0], "exit") == 0)
-		exe_exit(shell, args);
+		exe_exit(args);
 	else if (ft_strcmp(args[0], "unset") == 0)
 		val = exe_unset(shell, args);
 	g_signal = val;

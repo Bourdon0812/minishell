@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:37:44 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/04 17:04:40 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/07 09:45:42 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ static void	wait_children(pid_t *pids, pid_t last, int count, t_shell *shell)
 static void	handle_command_node(t_shell *shell, t_cmd *cmd, t_exec_ctx *ctx)
 {
 	pid_t	pid;
-	int		old_prev;
 
-	old_prev = ctx->prev;
 	if (cmd->next)
 		pid = good_with_pip(shell, cmd, &ctx->prev, ctx->fd);
 	else
@@ -80,7 +78,6 @@ void	complex_command(t_shell *shell, t_cmd *cmd)
 void	simple_command(t_shell *shell)
 {
 	pid_t	pid;
-	int		status;
 
 	if (is_builtins(shell->cmd[0]))
 		exe_builtins(shell, shell->cmd);

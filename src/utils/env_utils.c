@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:08:57 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/04 17:15:07 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/07 10:09:52 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int	is_valid_varname(char *name)
 	return (1);
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// Function for obtain a value from an env var ($VAR)
 char	*get_env_value(char *env_var, t_shell *shell)
 {
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/04 17:16:09 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/07 10:07:01 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,7 @@ static int	input_act(t_shell *shell)
 {
 	if (shell->input == NULL)
 		return (0);
-	if (ft_strncmp(shell->input, "exit", 5) == 0)
-	{
-		free(shell->input);
-		return (0);
-	}
+
 	if (shell->input[0] != '\0')
 		add_history(shell->input);
 	rl_replace_line("", 0);
@@ -78,7 +74,6 @@ int	main(int ac, char **av, char **env)
 	disable_slprint();
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, handle_sigquit);
-	signal(SIGPIPE, SIG_DFL);
 	if (copy_env(&(shell.envp), env, (size_env(env) + 1)) == 0)
 		return (ft_printf("Error with env\n"), 1);
 	while (1)
@@ -92,7 +87,7 @@ int	main(int ac, char **av, char **env)
 		else
 		{
 			if (!input_act(&shell))
-				break ;
+				return (ft_printf("exit\n"), 0);
 		}
 	}
 	return (0);

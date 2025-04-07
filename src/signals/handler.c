@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:38:25 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/04 17:16:09 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/07 10:07:01 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	handle_sigint(int sig)
 	rl_redisplay();
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// Function for desactivate ctrl^x printing
 void	disable_slprint(void)
 {
 	struct termios	term;
