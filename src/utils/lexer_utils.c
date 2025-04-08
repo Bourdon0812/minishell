@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 14:33:49 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/07 16:07:00 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/08 16:02:38 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,7 @@ void	ft_free_tab(char **to_clean)
 	i = 0;
 	while (to_clean[i])
 	{
-		if (to_clean[i])
-			free(to_clean[i]);
+		free(to_clean[i]);
 		i++;
 	}
 	free(to_clean);

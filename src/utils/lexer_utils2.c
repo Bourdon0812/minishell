@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   lexer_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 15:51:49 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/08 16:22:17 by yseguin          ###   ########.fr       */
+/*   Created: 2025/04/08 17:14:28 by yseguin           #+#    #+#             */
+/*   Updated: 2025/04/08 17:21:15 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	exe_exit(t_shell *shell, char **args)
+///////////////////////////////////////////////////////////////////////////////
+// function for check bad input.
+int	is_empty(char *input)
 {
-	int	sig;
-
-	if (args[1])
-		sig = ft_atoi(args[1]);
-	else
-		sig = 0;
-	ft_printf("exit\n");
-	free_shell(shell, 0);
-	exit(sig);
+	if (ft_strcmp(input, "\"\"") == 0)
+		return (ft_printf("Minishell: \'\': command not found\n"), 1);
+	if (ft_strcmp(input, "\'\'") == 0)
+		return (ft_printf("Minishell: \'\': command not found\n"), 1);
+	return (0);
 }
