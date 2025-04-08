@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/08 15:15:23 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/08 16:40:43 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	main(int ac, char **av, char **env)
 		else
 		{
 			if (!input_act(&shell))
-				return (free_shell(&shell, 0), ft_printf("exit\n"), 0);
+				exe_exit(&shell, (char *[]){"0", NULL});
 		}
 	}
 	return (0);
