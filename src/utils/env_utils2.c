@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:09:07 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/07 10:10:13 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/08 15:14:53 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,16 @@ char	*add_shlvl(char *env)
 		return (res);
 	}
 	return (ft_strdup(env));
+}
+
+void	free_shell(t_shell *shell, int mode)
+{
+	if (!shell)
+		return ;
+	if (shell->envp && !mode)
+		ft_free_tab(shell->envp);
+	if (shell->input)
+		free(shell->input);
+	if (shell->cmd)
+		ft_free_tab(shell->cmd);
 }
