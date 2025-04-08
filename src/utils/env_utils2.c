@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:09:07 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/08 16:40:56 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/08 17:28:33 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,3 @@ void	free_shell(t_shell *shell, int mode)
 		shell->cmd = NULL;
 	}
 }
-

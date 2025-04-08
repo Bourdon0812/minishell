@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:13 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/04 16:07:20 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:19:33 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ typedef struct s_shell	t_shell;
 
 /* lexer.c */
 int		count_args(char *input);
+int		is_empty(char *input);
 char	*get_arg(char *input, int start, int end, int keep_quotes);
 int		split_args_p2(char *input, int end);
 char	**split_args(char *input, int keep_quotes);

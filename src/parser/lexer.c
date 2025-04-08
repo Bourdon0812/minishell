@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:41:49 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/08 16:18:38 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/08 17:28:17 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void	lexer(t_shell *shell)
 	char	*input_cpy;
 
 	if (!shell->input)
+		return ;
+	if (is_empty(shell->input))
 		return ;
 	input_cpy = ft_strdup(shell->input);
 	if (!input_cpy)
