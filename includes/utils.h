@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:16 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/08 15:15:13 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/08 18:34:45 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	print_env(t_shell *shell);
 char	*get_env_value(char *env_var, t_shell *shell);
 char	*add_shlvl(char *env);
 void	free_shell(t_shell *shell, int mode);
-
+void	free_cmd(t_cmd *cmd);
 /* struct_utils.c */
 t_cmd	*new_cmd(void);
 
