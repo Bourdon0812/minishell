@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:37:44 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/07 09:45:42 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/08 18:31:08 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static void	handle_command_node(t_shell *shell, t_cmd *cmd, t_exec_ctx *ctx)
 void	complex_command(t_shell *shell, t_cmd *cmd)
 {
 	t_exec_ctx	ctx;
+	t_cmd		*next;
 
 	ctx.i = 0;
 	ctx.prev = 0;
@@ -66,7 +67,9 @@ void	complex_command(t_shell *shell, t_cmd *cmd)
 			return ;
 		}
 		handle_command_node(shell, cmd, &ctx);
-		cmd = cmd->next;
+		next = cmd->next;
+		free_cmd(cmd);
+		cmd = next;
 	}
 	if (ctx.prev != 0)
 		close(ctx.prev);

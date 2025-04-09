@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:09:07 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/08 17:32:42 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/09 15:46:10 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ char	*add_shlvl(char *env)
 	return (ft_strdup(env));
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// Function for clean shell struct at the end of shell or a cmd (use mod var)
 void	free_shell(t_shell *shell, int mode)
 {
 	if (!shell)
