@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:37:44 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/08 18:31:08 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/09 16:29:24 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ void	complex_command(t_shell *shell, t_cmd *cmd)
 	t_exec_ctx	ctx;
 	t_cmd		*next;
 
-	ctx.i = 0;
-	ctx.prev = 0;
+	ft_bzero(&ctx, sizeof(t_exec_ctx));
 	while (cmd)
 	{
 		if (g_signal != NEUTRAL_SIGINT)

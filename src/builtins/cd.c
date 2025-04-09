@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:51:40 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/08 16:57:59 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:45:44 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	*get_env(char **envp, char *key)
 	return (NULL);
 }
 
-int	has_home(t_shell *shell)
+static int	has_home(t_shell *shell)
 {
 	int		i;
 
@@ -48,11 +48,18 @@ static void	update_env(t_shell *shell, char *key, char *new_value)
 {
 	int		i;
 	char	*tmp;
+	char	*joined;
 
-	if (!shell->envp || !key || !new_value)
+	if (shell->envp == NULL || key == NULL || new_value == NULL)
 		return ;
 	i = -1;
-	tmp = ft_strjoin(ft_strjoin(key, "="), new_value);
+	joined = ft_strjoin(key, "=");
+	if (!joined)
+		return ;
+	tmp = ft_strjoin(joined, new_value);
+	free(joined);
+	if (!tmp)
+		return ;
 	while (shell->envp[++i])
 	{
 		if (!ft_strncmp(shell->envp[i], key, ft_strlen(key))
@@ -63,6 +70,7 @@ static void	update_env(t_shell *shell, char *key, char *new_value)
 			return ;
 		}
 	}
+	free(tmp);
 }
 
 int	exe_cd(t_shell *shell, char **args)
