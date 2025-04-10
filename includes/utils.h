@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:16 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/08 15:15:13 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/10 16:59:54 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int		size_env(char **env);
 int		copy_env(char ***nenv, char **env, int size);
 int		is_valid_varname(char *name);
 void	print_env(t_shell *shell);
+
+/* env_utils2.c */
 char	*get_env_value(char *env_var, t_shell *shell);
+char	*get_env_var(char **envp, char *key);
 char	*add_shlvl(char *env);
 void	free_shell(t_shell *shell, int mode);
 
@@ -40,4 +43,10 @@ int		parse_argument(char *input, int end);
 void	handle_assignment(char *input, int *end);
 char	*clean_arg(char *arg, int keep_quotes);
 void	ft_free_tab(char **to_clean);
+
+/* echo_utils.c */
+int		skip_n_flags(char **args, int *newline_flag);
+char	*rm_quotes(char *str);
+char	*allocate_result(char *str);
+
 #endif
