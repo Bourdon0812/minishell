@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:51:40 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/10 17:06:10 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/10 17:11:00 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,5 @@ int	exe_cd(t_shell *shell, char **args)
 	temp = get_env_value("$PWD", shell);
 	update_env(shell, "OLDPWD", temp);
 	update_env(shell, "PWD", old_pwd);
-	free(old_pwd);
-	free(temp);
-	free(new_path);
-	return (0);
+	return (free(old_pwd), free(temp), free(new_path), 0);
 }
