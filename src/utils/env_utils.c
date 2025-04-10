@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:08:57 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/07 15:01:38 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/10 17:00:03 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,32 +90,4 @@ int	is_valid_varname(char *name)
 		i++;
 	}
 	return (1);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-// Function for obtain a value from an env var ($VAR)
-char	*get_env_value(char *env_var, t_shell *shell)
-{
-	int		i;
-	char	*key;
-	char	**envp;
-	size_t	len;
-
-	envp = shell->envp;
-	if (!env_var || !envp || env_var[0] != '$' || env_var[1] == '\0')
-		return (NULL);
-	key = &env_var[1];
-	len = strlen(key);
-	if (env_var[0] == '$' && env_var[1] == '?' && env_var[2] == '\0')
-	{
-		return (ft_itoa(shell->l_sig));
-	}
-	i = 0;
-	while (envp[i])
-	{
-		if (strncmp(envp[i], key, len) == 0 && envp[i][len] == '=')
-			return (ft_strdup(&envp[i][len + 1]));
-		i++;
-	}
-	return (NULL);
 }
