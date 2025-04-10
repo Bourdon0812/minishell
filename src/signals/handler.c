@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:38:25 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/10 17:09:05 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/10 17:10:13 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void	handle_sigquit(int sig)
 {
 	(void)sig;
 	rl_on_new_line();
-	//rl_replace_line("", 0);
+	rl_replace_line("", 0);
 	rl_redisplay();
 }
