@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:37:44 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/08 18:31:08 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/11 15:36:02 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,13 @@ static void	handle_command_node(t_shell *shell, t_cmd *cmd, t_exec_ctx *ctx)
 		pid = good_with_pip(shell, cmd, &ctx->prev, ctx->fd);
 	else
 	{
-		if (ctx->fd[1] > 0)
+		if (has_pipe(shell->input))
 		{
-			close(ctx->fd[1]);
-			ctx->fd[1] = -1;
+			if (ctx->fd[1] > 0)
+			{
+				close(ctx->fd[1]);
+				ctx->fd[1] = -1;
+			}
 		}
 		pid = good_rep(shell, cmd, ctx->prev, STDOUT_FILENO);
 	}

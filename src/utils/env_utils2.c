@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:09:07 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/10 17:06:32 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/11 16:50:40 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,24 +71,6 @@ char	*get_env_value(char *env_var, t_shell *shell)
 	{
 		if (strncmp(envp[i], key, len) == 0 && envp[i][len] == '=')
 			return (ft_strdup(&envp[i][len + 1]));
-		i++;
-	}
-	return (NULL);
-}
-
-char	*get_env_var(char **envp, char *key)
-{
-	int		i;
-	size_t	len;
-
-	if (!envp || !key)
-		return (NULL);
-	len = ft_strlen(key);
-	i = 0;
-	while (envp[i])
-	{
-		if (!ft_strncmp(envp[i], key, len) && envp[i][len] == '=')
-			return (envp[i] + len + 1);
 		i++;
 	}
 	return (NULL);

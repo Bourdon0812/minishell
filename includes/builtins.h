@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:07 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/07 15:13:42 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/11 15:17:54 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		exe_echo(t_shell *shell, char **args);
 int		exe_cd(t_shell *shell, char **args);
 
 /* pwd.c */
-int		exe_pwd(t_shell *shell, char **args);
+int		exe_pwd(char **args);
 
 /* export.c */
 int		exe_export(t_shell *shell, char **args);
