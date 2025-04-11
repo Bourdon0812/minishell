@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/08 16:40:43 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/11 16:51:23 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	input_act(t_shell *shell)
 		return (0);
 	if (shell->input[0] != '\0')
 		add_history(shell->input);
-	rl_replace_line("", 0);
+	//rl_replace_line("", 0);
 	lexer(shell);
 	free_shell(shell, 1);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:51:40 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/11 16:48:06 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/11 16:52:15 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int	exe_cd(t_shell *shell, char **args)
 {
 	char	*new_path;
 	char	*old_pwd;
-	char	*temp;
 
 	new_path = NULL;
 	if (!args[1] || !ft_strcmp(args[1], "~"))
