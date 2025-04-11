@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:42:11 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/10 16:43:29 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/11 16:25:56 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,27 @@ int	skip_n_flags(char **args, int *newline_flag)
 		i++;
 	}
 	return (i);
+}
+
+void	expand_env_variable(const char *arg, int *i, int start, t_shell *shell)
+{
+	char	*name;
+	char	*with_dollar;
+	char	*value;
+
+	if (start == *i)
+	{
+		write(1, "$", 1);
+		return ;
+	}
+	name = ft_substr(arg, start, *i - start);
+	with_dollar = ft_strjoin("$", name);
+	free(name);
+	value = get_env_value(with_dollar, shell);
+	free(with_dollar);
+	if (value)
+	{
+		write(1, value, ft_strlen(value));
+		free(value);
+	}
 }

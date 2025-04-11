@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   std_selector.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:04:21 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/04 17:30:02 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/11 16:19:38 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ static pid_t	good_rep_p2(t_shell *shell, t_cmd *cmd, int in, int out)
 			return (g_signal = EXIT_SIGINT, -1);
 	}
 	if (g_signal == EXIT_SIGINT)
+		return (-1);
+	if (shell->cmd[0][0] == '<' && shell->cmd[0][1] == '<')
 		return (-1);
 	if (is_builtins(cmd->args[0]))
 		return (fork_buitins(shell, cmd->args, in, out));

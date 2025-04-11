@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:16 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/10 17:05:43 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/11 16:27:07 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ void	ft_free_tab(char **to_clean);
 int		skip_n_flags(char **args, int *newline_flag);
 char	*rm_quotes(char *str);
 char	*allocate_result(char *str);
+void	expand_env_variable(const char *arg, int *i, int start, t_shell *shell);
 
 #endif
