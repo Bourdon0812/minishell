@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/09 16:15:41 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/08 16:40:43 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	check_args(int ac, char **av, char **input)
 			*input = readline(GREEN "Minishell> " RESET);
 		else
 		{
-			*input = ft_strdup(av[2]);
+			*input = av[2];
 			return (2);
 		}
 		return (1);
@@ -61,13 +61,6 @@ static int	input_act(t_shell *shell)
 	return (1);
 }
 
-static void end_c(t_shell *shell, int mode)
-{
-	if (mode)
-		lexer(shell);
-	free_shell(shell, 0);
-}
-
 ///////////////////////////////////////////////////////////////////////////////
 // Main function, start the soft.
 int	main(int ac, char **av, char **env)
@@ -79,16 +72,16 @@ int	main(int ac, char **av, char **env)
 	disable_slprint();
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, handle_sigquit);
-	if (copy_env(&shell.envp, env, (size_env(env) + 1)) == 0)
+	if (copy_env(&(shell.envp), env, (size_env(env) + 1)) == 0)
 		return (ft_printf("Error with env\n"), 1);
 	while (1)
 	{
 		g_signal = NEUTRAL_SIGINT;
 		check = check_args(ac, av, &(shell.input));
 		if (check == 2)
-			return (end_c(&shell, 1), 0);
+			return (lexer(&shell), 0);
 		else if (check == 0)
-			return (end_c(&shell, 0), ft_printf("Error wrong args\n"), 1);
+			return (ft_printf("Error wrong args\n"), 1);
 		else
 		{
 			if (!input_act(&shell))

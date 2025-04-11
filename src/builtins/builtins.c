@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:41:11 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/07 15:13:46 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/11 15:17:41 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	exe_builtins(t_shell *shell, char **args)
 	else if (ft_strcmp(args[0], "cd") == 0)
 		val = exe_cd(shell, args);
 	else if (ft_strcmp(args[0], "pwd") == 0)
-		val = exe_pwd(shell, args);
+		val = exe_pwd(args);
 	else if (ft_strcmp(args[0], "export") == 0)
 		val = exe_export(shell, args);
 	else if (ft_strcmp(args[0], "env") == 0)

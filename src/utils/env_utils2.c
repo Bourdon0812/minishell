@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:09:07 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/09 15:46:10 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/11 15:22:20 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,32 @@ void	free_shell(t_shell *shell, int mode)
 		ft_free_tab(shell->cmd);
 		shell->cmd = NULL;
 	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Function for obtain a value from an env var ($VAR)
+char	*get_env_value(char *env_var, t_shell *shell)
+{
+	int		i;
+	char	*key;
+	char	**envp;
+	size_t	len;
+
+	envp = shell->envp;
+	if (!env_var || !envp || env_var[0] != '$' || env_var[1] == '\0')
+		return (NULL);
+	key = &env_var[1];
+	len = strlen(key);
+	if (env_var[0] == '$' && env_var[1] == '?' && env_var[2] == '\0')
+	{
+		return (ft_itoa(shell->l_sig));
+	}
+	i = 0;
+	while (envp[i])
+	{
+		if (strncmp(envp[i], key, len) == 0 && envp[i][len] == '=')
+			return (ft_strdup(&envp[i][len + 1]));
+		i++;
+	}
+	return (NULL);
 }
