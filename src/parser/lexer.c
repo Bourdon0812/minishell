@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:41:49 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/11 16:49:24 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/14 00:42:13 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ char	**split_args(char *input, int keep_quotes)
 	int		end;
 	int		k;
 
+	if (input == NULL || *input == '\0')
+		return (NULL);
 	end = 0;
 	k = -1;
 	cmd = malloc(sizeof(char *) * (count_args(input) + 1));
-	if (!cmd)
-		return (NULL);
 	while (input[end])
 	{
 		while (ft_iswsp(input[end]) && input[end])
@@ -75,7 +75,8 @@ char	**split_args(char *input, int keep_quotes)
 			end = parse_argument(input, end);
 		else
 			end = split_args_p2(input, end);
-		cmd[++k] = get_arg(input, start, end, keep_quotes);
+		if (start < end)
+			cmd[++k] = get_arg(input, start, end, keep_quotes);
 	}
 	cmd[++k] = NULL;
 	return (cmd);
@@ -86,9 +87,7 @@ void	lexer(t_shell *shell)
 	int		keep_quotes;
 	char	*input_cpy;
 
-	if (!shell->input)
-		return ;
-	if (is_empty(shell->input))
+	if (!shell->input || is_empty(shell->input))
 		return ;
 	input_cpy = ft_strdup(shell->input);
 	if (!input_cpy)

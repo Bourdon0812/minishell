@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 14:33:49 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/08 16:02:38 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/14 00:48:11 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,21 @@ void	clear_lexer(t_shell *shell)
 	int		count;
 	char	**new_cmd;
 
+	if (!shell->cmd)
+		return ;
 	i = -1;
 	count = 0;
-	while (shell->cmd[++i] != NULL)
-		if (ft_strlen(shell->cmd[i]) != 0)
+	while (shell->cmd[++i])
+		if (shell->cmd[i] && ft_strlen(shell->cmd[i]) != 0)
 			count++;
 	new_cmd = malloc(sizeof(char *) * (count + 1));
-	if (new_cmd == NULL)
+	if (!new_cmd)
 		return ;
 	i = -1;
 	j = 0;
-	while (shell->cmd[++i] != NULL)
-	{
-		if (ft_strlen(shell->cmd[i]) != 0)
+	while (shell->cmd[++i])
+		if (shell->cmd[i] && ft_strlen(shell->cmd[i]) != 0)
 			new_cmd[j++] = ft_strdup(shell->cmd[i]);
-	}
 	new_cmd[j] = NULL;
 	ft_free_tab(shell->cmd);
 	shell->cmd = new_cmd;
