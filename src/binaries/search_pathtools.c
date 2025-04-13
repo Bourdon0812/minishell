@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   search_pathtools.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 13:49:41 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/04 17:04:53 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/13 23:51:47 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static size_t	ft_strspn(const char *s, const char *accept)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (!ft_strchr(accept, s[i]))
+			break ;
+		i++;
+	}
+	return (i);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // init and check args before search_path, and return error if needed
@@ -33,24 +47,24 @@ static int	init_path_search(char *c, t_shell *s, char ***p, char ***args)
 	return (1);
 }
 
-///////////////////////////////////////////////////////////////////////////////
-// Search the good path for a cmd with the good method (not which xD)
-char	*search_path(char *cmd, t_shell *shell, int i)
+char	*search_path(char *c, t_shell *shell, int i)
 {
 	char	*tmp;
 	char	*bin;
 	char	**args;
 	char	**paths;
 
-	if (ft_strchr(cmd, '/'))
+	if (c == NULL || *c == '\0' || ft_strspn(c, " \t\r\n") == ft_strlen(c))
+		return (NULL);
+	if (ft_strchr(c, '/'))
 	{
-		if (access(cmd, F_OK | X_OK) == 0)
-			return (ft_strdup(cmd));
+		if (access(c, F_OK | X_OK) == 0)
+			return (ft_strdup(c));
 		return (NULL);
 	}
-	if (!init_path_search(cmd, shell, &paths, &args))
+	if (!init_path_search(c, shell, &paths, &args))
 		return (NULL);
-	while (paths[i])
+	while (paths[i++])
 	{
 		tmp = ft_strjoin(paths[i], "/");
 		bin = ft_strjoin(tmp, args[0]);
@@ -58,7 +72,6 @@ char	*search_path(char *cmd, t_shell *shell, int i)
 		if (bin && access(bin, F_OK | X_OK) == 0)
 			return (ft_free_tab(paths), ft_free_tab(args), bin);
 		free(bin);
-		i++;
 	}
 	return (ft_free_tab(paths), ft_free_tab(args), NULL);
 }

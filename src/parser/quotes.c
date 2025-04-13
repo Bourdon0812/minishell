@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 16:34:34 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/03/04 17:06:29 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/13 22:52:52 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,16 @@ char	*remove_quotes(char *str)
 	int		len;
 	char	*nstr;
 
+	if (str == NULL)
+		return (NULL);
 	if (has_unclosed_quotes(str))
 		return (ft_putstr_fd("Error: Unclosed quotes\n", 2), NULL);
 	len = ft_strlen(str);
-	i = 0;
-	i2 = 0;
 	nstr = malloc(sizeof(char) * (len + 1));
 	if (nstr == NULL)
 		return (NULL);
+	i = 0;
+	i2 = 0;
 	while (str[i] != '\0')
 	{
 		if (is_quote(str[i]))
