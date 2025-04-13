@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 16:34:34 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/13 22:52:52 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/14 01:35:32 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,23 @@ void	skip_quotes(char *input, int *i, char quote)
 	while (input[*i] != quote && input[*i] != '\0')
 		(*i)++;
 	if (input[*i] == quote)
+		(*i)++;
+}
+
+void	print_inside_quotes(const char *arg, int *i, char q, t_shell *shell)
+{
+	while (arg[*i] && arg[*i] != q)
+	{
+		if (q == '\'')
+			write(1, &arg[(*i)++], 1);
+		else if (q == '"')
+		{
+			if (arg[*i] == '$')
+				handle_dollar(arg, i, shell);
+			else
+				write(1, &arg[(*i)++], 1);
+		}
+	}
+	if (arg[*i])
 		(*i)++;
 }

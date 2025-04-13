@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:13 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/08 17:19:33 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/14 01:35:47 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		has_unclosed_quotes(char *str);
 void	skip_quotes_and_copy(char *str, char *nstr, int *i, int *i2);
 char	*remove_quotes(char *str);
 void	skip_quotes(char *input, int *i, char quote);
+void	print_inside_quotes(const char *arg, int *i, char q, t_shell *shell);
 
 /* parsing.c */
 void	allocate_and_copy_args(t_cmd *cmd, char *arg);

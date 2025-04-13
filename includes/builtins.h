@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:07 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/11 15:17:54 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/14 01:36:47 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	exe_builtins(t_shell *shell, char **args);
 
 /* echo.c */
 int		exe_echo(t_shell *shell, char **args);
+void	handle_dollar(const char *arg, int *i, t_shell *shell);
 
 /* cd.c */
 int		exe_cd(t_shell *shell, char **args);

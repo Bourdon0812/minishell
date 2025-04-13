@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 15:53:08 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/11 16:48:31 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/14 01:36:24 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	print_exit_code_if_needed(const char *arg, int *i, t_shell *shell)
 	return (0);
 }
 
-static void	handle_dollar(const char *arg, int *i, t_shell *shell)
+void	handle_dollar(const char *arg, int *i, t_shell *shell)
 {
 	int	start;
 
@@ -51,12 +51,18 @@ static void	handle_dollar(const char *arg, int *i, t_shell *shell)
 
 void	print_argument(char *arg, t_shell *shell)
 {
-	int	i;
+	int		i;
+	char	quote;
 
 	i = 0;
 	while (arg[i])
 	{
-		if (arg[i] == '\\' && arg[i + 1])
+		if (arg[i] == '\'' || arg[i] == '"')
+		{
+			quote = arg[i++];
+			print_inside_quotes(arg, &i, quote, shell);
+		}
+		else if (arg[i] == '\\' && arg[i + 1])
 			handle_backslash(arg, &i);
 		else if (arg[i] == '$')
 			handle_dollar(arg, &i, shell);
