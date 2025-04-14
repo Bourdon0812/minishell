@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 17:14:28 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/14 10:37:43 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/14 11:08:38 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,15 @@ int	check_last_arg(t_shell *shell)
 	i = 0;
 	i2 = 0;
 	while (shell->cmd[i] != NULL)
+	{
+		if (ft_strlen(shell->cmd[i]) > 1
+			&& ft_strchr(shell->cmd[i], '|') != NULL)
+		{
+			printf("syntax error\n");
+			return (0);
+		}
 		i++;
+	}
 	i = i - 1;
 	if (i <= 0)
 		return (1);
