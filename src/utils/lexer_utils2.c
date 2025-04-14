@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 17:14:28 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/14 10:35:53 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:37:43 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	check_last_arg(t_shell *shell)
 		i++;
 	i = i - 1;
 	if (i <= 0)
-		return (0);
+		return (1);
 	while (shell->cmd[i][i2] != '\0')
 	{
 		if (shell->cmd[i][i2] == '|')
