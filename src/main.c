@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:26 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/11 16:51:23 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/14 11:01:00 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	input_act(t_shell *shell)
 		return (0);
 	if (shell->input[0] != '\0')
 		add_history(shell->input);
-	//rl_replace_line("", 0);
+	rl_replace_line("", 0);
 	lexer(shell);
 	free_shell(shell, 1);
 	return (1);
@@ -72,7 +72,7 @@ int	main(int ac, char **av, char **env)
 	disable_slprint();
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, handle_sigquit);
-	if (copy_env(&(shell.envp), env, (size_env(env) + 1)) == 0)
+	if (copy_env(&(shell.envp), env, (size_env(env) + 1), 1) == 0)
 		return (ft_printf("Error with env\n"), 1);
 	while (1)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:57:01 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/14 02:02:42 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:24:05 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	add_var(t_shell *shell, char *cmd)
 	char	**new_env;
 
 	size = size_env(shell->envp) + 2;
-	copy_env(&new_env, shell->envp, size);
+	copy_env(&new_env, shell->envp, size, 0);
 	new_env[size - 2] = ft_strdup(cmd);
 	new_env[size - 1] = NULL;
-	free(shell->envp);
+	ft_free_tab(shell->envp);
 	shell->envp = new_env;
 }
 

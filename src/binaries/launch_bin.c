@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 13:36:54 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/07 10:11:39 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/14 10:12:12 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int	check_cmd(char **args, t_shell *shell)
 	if (!path)
 	{
 		ft_printf("Minishell: %s: command not found\n", args[0]);
+		shell->l_sig = 1;
 		return (0);
 	}
 	free(path);

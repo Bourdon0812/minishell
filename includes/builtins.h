@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:07 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/14 02:01:56 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/14 11:00:55 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int		exe_export(t_shell *shell, char **args);
 void	start_exp(int i, t_shell *shell, char **args);
 void	handle_invalid_export(char *arg, char *original);
 char	*handle_missing_equal(char *arg);
-
 
 /* unset.c */
 int		exe_unset(t_shell *shell, char **args);

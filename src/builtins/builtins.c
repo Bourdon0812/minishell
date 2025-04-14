@@ -6,7 +6,7 @@
 /*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:41:11 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/11 15:17:41 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/14 10:45:45 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,5 @@ void	exe_builtins(t_shell *shell, char **args)
 	else if (ft_strcmp(args[0], "unset") == 0)
 		val = exe_unset(shell, args);
 	g_signal = val;
+	shell->l_sig = val;
 }

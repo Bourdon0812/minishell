@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:16 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/14 10:32:26 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:42:56 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,13 @@ int		has_redirection(char *input);
 
 /* env_utils.c */
 int		size_env(char **env);
-int		copy_env(char ***nenv, char **env, int size);
+int		copy_env(char ***nenv, char **env, int size, int add);
 int		is_valid_varname(char *name);
 void	print_env(t_shell *shell);
 
 /* env_utils2.c */
 char	*get_env_value(char *env_var, t_shell *shell);
-char	*get_env_var(char **envp, char *key);
-char	*add_shlvl(char *env);
+char	*add_shlvl(char *env, int add);
 void	free_shell(t_shell *shell, int mode);
 void	free_cmd(t_cmd *cmd);
 /* struct_utils.c */

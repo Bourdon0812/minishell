@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 17:09:07 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/11 16:50:40 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:21:07 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 // update the shLVL at the start of project
-char	*add_shlvl(char *env)
+char	*add_shlvl(char *env, int add)
 {
 	char	*tmp;
 	char	*res;
 
-	if (ft_strncmp(env, "SHLVL=", 6) == 0)
+	if (ft_strncmp(env, "SHLVL=", 6) == 0 && add)
 	{
 		tmp = ft_itoa(ft_atoi(env + 6) + 1);
 		if (!tmp)

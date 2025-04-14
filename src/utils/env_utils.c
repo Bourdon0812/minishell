@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:08:57 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/14 09:53:48 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:23:03 by yseguin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	size_env(char **env)
 
 ///////////////////////////////////////////////////////////////////////////////
 // Function for copy the env (needed for edit with export and unset)
-int	copy_env(char ***nenv, char **env, int size)
+int	copy_env(char ***nenv, char **env, int size, int add)
 {
 	int	i;
 
@@ -36,7 +36,7 @@ int	copy_env(char ***nenv, char **env, int size)
 	i = 0;
 	while (env[i])
 	{
-		(*nenv)[i] = add_shlvl(env[i]);
+		(*nenv)[i] = add_shlvl(env[i], add);
 		if (!(*nenv)[i])
 		{
 			while (--i >= 0)
