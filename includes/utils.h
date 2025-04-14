@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:16 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/11 16:47:41 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/14 02:01:22 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,12 @@ int		skip_n_flags(char **args, int *newline_flag);
 char	*rm_quotes(char *str);
 char	*allocate_result(char *str);
 void	expand_env_variable(const char *arg, int *i, int start, t_shell *shell);
+
+/* export_utils.c */
+void	update_var(int i, char **env, char *cmd);
+void	add_var(t_shell *shell, char *cmd);
+char	*get_env_key(char *entry);
+int		check_match(char **env, char *key);
+int		var_is_in(char **env, char *path);
 
 #endif
