@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 01:41:49 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/14 10:19:56 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:31:58 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ void	lexer(t_shell *shell)
 	clear_lexer(shell);
 	if (!shell->cmd || (!shell->cmd[0] && !shell->cmd[1])
 		|| shell->cmd[0][0] == '|'
-		|| shell->cmd[0][ft_strlen(shell->cmd[0]) - 1] == '|')
+		|| shell->cmd[0][ft_strlen(shell->cmd[0]) - 1] == '|'
+		|| check_last_arg(shell) == 0)
 		return ;
 	if (has_redirection(shell->input) || has_pipe(shell->input))
 		complex_command(shell, parsing(shell));

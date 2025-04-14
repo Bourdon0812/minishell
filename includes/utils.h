@@ -6,7 +6,7 @@
 /*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:04:16 by ilbonnev          #+#    #+#             */
-/*   Updated: 2025/04/14 02:01:22 by ilbonnev         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:32:26 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int		parse_argument(char *input, int end);
 void	handle_assignment(char *input, int *end);
 char	*clean_arg(char *arg, int keep_quotes);
 void	ft_free_tab(char **to_clean);
+int		check_last_arg(t_shell *shell);
 
 /* echo_utils.c */
 int		skip_n_flags(char **args, int *newline_flag);

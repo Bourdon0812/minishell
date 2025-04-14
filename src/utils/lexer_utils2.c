@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yseguin <youvataque@icloud.com>            +#+  +:+       +#+        */
+/*   By: ilbonnev <ilbonnev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 17:14:28 by yseguin           #+#    #+#             */
-/*   Updated: 2025/04/08 18:37:29 by yseguin          ###   ########.fr       */
+/*   Updated: 2025/04/14 10:35:53 by ilbonnev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,25 @@ void	free_cmd(t_cmd *cmd)
 	if (cmd->output_file)
 		free(cmd->output_file);
 	free(cmd);
+}
+
+int	check_last_arg(t_shell *shell)
+{
+	int	i;
+	int	i2;
+
+	i = 0;
+	i2 = 0;
+	while (shell->cmd[i] != NULL)
+		i++;
+	i = i - 1;
+	if (i <= 0)
+		return (0);
+	while (shell->cmd[i][i2] != '\0')
+	{
+		if (shell->cmd[i][i2] == '|')
+			return (0);
+		i2++;
+	}
+	return (1);
 }
